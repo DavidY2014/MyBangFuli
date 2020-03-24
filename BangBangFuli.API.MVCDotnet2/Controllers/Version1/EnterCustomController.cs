@@ -50,6 +50,8 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
             _orderDetailService = orderDetailService;
         }
 
+        #region 工作台 首页
+
         /// <summary>
         /// 首页，工作台
         /// </summary>
@@ -58,6 +60,9 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
         {
             return View();
         }
+
+        #endregion
+
 
         #region 商品
 
@@ -102,7 +107,7 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public IActionResult AddNewProduct(int id)
+        public IActionResult AddProduct(int id = 0)
         {
             ProductInformation productInfo = new ProductInformation();
             if (id>0)
