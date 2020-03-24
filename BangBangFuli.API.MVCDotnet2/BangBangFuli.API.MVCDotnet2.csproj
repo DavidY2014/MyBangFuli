@@ -25,7 +25,6 @@
 
 
   <ItemGroup>
-    <Folder Include="BasePages\EnterCustom\" />
     <Folder Include="upload\" />
     <Folder Include="BasePages\" />
     <Folder Include="wwwroot\banners\" />

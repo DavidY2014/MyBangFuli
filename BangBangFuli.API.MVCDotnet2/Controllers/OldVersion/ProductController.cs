@@ -39,9 +39,9 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
                 BatchInformation batchInfo = _batchInformationService.GetBatchInfoById(product.BatchId);
                 productViewModelList.Add(new ProductInformationViewModel
                 {
-                    ProductId = product.Id,
-                    ProductCode = product.ProductCode,
-                    ProductName = product.ProductName,
+                    //ProductId = product.Id,
+                    //ProductCode = product.ProductCode,
+                    //ProductName = product.ProductName,
                     StockStatusName = GetStockStatusDisplayName((int)product.StockType),
                     ProductStatusName = GetProductStatusDisplayName((int)product.ProductStatus),
                     ClassTypeName = GetClassTypeDisplayName((int)product.Type),
@@ -103,9 +103,9 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
                 ProductInformation product = _productInformationService.GetProductById((int)id);
                 model = new ProductInformationViewModel
                 {
-                    ProductId = product.Id,
-                    ProductCode = product.ProductCode,
-                    ProductName = product.ProductName,
+                    //ProductId = product.Id,
+                    //ProductCode = product.ProductCode,
+                    //ProductName = product.ProductName,
                     ProductStatusType = product.ProductStatus,
                     StockStatusType=product.StockType,
                     ClassType = product.Type,
@@ -172,8 +172,8 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
                 }
                 ProductInformation product = new ProductInformation
                 {
-                    ProductCode = model.ProductCode,
-                    ProductName = model.ProductName,
+                    //ProductCode = model.ProductCode,
+                    //ProductName = model.ProductName,
                     ProductStatus =  model.ProductStatusType,
                     StockType = model.StockStatusType,
                     Type = model.ClassType,
@@ -211,9 +211,9 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
                 }
                 ProductInformation product = new ProductInformation
                 {
-                    Id= model.ProductId,
-                    ProductCode = model.ProductCode,
-                    ProductName = model.ProductName,
+                    //Id= model.ProductId,
+                    //ProductCode = model.ProductCode,
+                    //ProductName = model.ProductName,
                     StockType = model.StockStatusType,
                     ProductStatus = model.ProductStatusType,
                     Type = model.ClassType,

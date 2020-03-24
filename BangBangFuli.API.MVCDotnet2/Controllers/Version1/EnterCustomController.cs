@@ -65,58 +65,34 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
         {
             return View();
         }
-        [HttpGet]
-        public IActionResult ProductListData(int page, int limit)
-        {
-            List<ProductInformationViewModel> productInfolist = new List<ProductInformationViewModel>();
-            //var users = _productInformationService.GetByPageLimit(page, limit);
-            //if (users.Item1 != null && users.Item1.Count > 0)
-            //{
-            //    foreach (var user in users.Item1)
-            //    {
-            //        UserViewModel vm = new UserViewModel();
-            //        vm.CreateTime = user.CreateTime.ToString("yyyy-MM-dd");
-            //        vm.ID = user.Id;
-            //        vm.Name = user.Name;
-            //        if (user.RoleID > 0)
-            //        {
-            //            var info = _userRoleService.Get(user.RoleID);
-            //            if (info != null)
-            //                vm.RoleName = info.RoleName;
-            //        }
-            //        vm.TelPhone = user.TelPhone;
-            //        vm.UserName = user.UserName;
-            //        userlist.Add(vm);
-            //    }
-            //}
-            //return Json(new { code = 0, msg = "", count = users.Item2, data = userlist.ToArray() });
-            return null;
-        }
 
         /// <summary>
         /// 商品页面
         /// </summary>
         /// <returns></returns>
-        public IActionResult QueryProductList()
+        [HttpGet]
+        public IActionResult ProductListData(int page, int limit)
         {
-            var productViewModelList = new List<ProductInformationViewModel>();
-            var products = _productInformationService.GetAll();
-            foreach (var product in products)
+            List<ProductInformationViewModel> productList = new List<ProductInformationViewModel>();
+            var productinfos = _productInformationService.GetList(page, limit);
+            if (productinfos.Item1 != null && productinfos.Item1.Count > 0)
             {
-                BatchInformation batchInfo = _batchInformationService.GetBatchInfoById(product.BatchId);
-                productViewModelList.Add(new ProductInformationViewModel
+                foreach (var product in productinfos.Item1)
                 {
-                    ProductId = product.Id,
-                    ProductCode = product.ProductCode,
-                    ProductName = product.ProductName,
-                    StockStatusType = product.StockType,
-                    ProductStatusType = product.ProductStatus,
-                    ClassType = product.Type,
-                    BatchId = product.BatchId,
-                    BatchName =batchInfo!=null?batchInfo.Name:string.Empty
-                });
+                    BatchInformation batchInfo = _batchInformationService.GetBatchInfoById(product.BatchId);
+                    ProductInformationViewModel vm = new ProductInformationViewModel();
+                    vm.Id = product.Id;
+                    vm.Code = product.ProductCode;
+                    vm.Name = product.ProductName;
+                    vm.StockStatusType = product.StockType;
+                    vm.ProductStatusType = product.ProductStatus;
+                    vm.ClassType = product.Type;
+                    vm.BatchId = product.BatchId;
+                    vm.BatchName = batchInfo != null ? batchInfo.Name : string.Empty;
+                    productList.Add(vm);
+                }
             }
-            return View(productViewModelList);
+            return Json(new { code = 0, msg = "", count = productinfos.Item2, data = productList.ToArray() });
         }
 
 

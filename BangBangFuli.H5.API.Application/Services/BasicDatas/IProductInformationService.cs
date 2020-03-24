@@ -11,7 +11,7 @@ namespace BangBangFuli.H5.API.Application.Services.BasicDatas
     {
         List<ProductInformation> GetAll();
 
-        List<ProductInformation> GetByPageLimit(int page, int limit);
+        Tuple<List<ProductInformation>, long> GetList(int pageIndex, int pageSize);
         void Save(ProductInformation product);
 
         int AddProduct(ProductInformation productInfo);

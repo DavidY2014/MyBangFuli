@@ -11,6 +11,7 @@ namespace BangBangFuli.H5.API.Core.IRepositories.BasicDatas
     {
         List<ProductInformation> GetAll();
 
+        Tuple<List<ProductInformation>, long> GetList( int pageIndex, int pageSize);
         void Save(ProductInformation product);
 
         int AddProduct(ProductInformation productInfo);

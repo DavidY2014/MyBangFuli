@@ -11,12 +11,12 @@ namespace BangBangFuli.API.MVCDotnet2.Models
 {
     public class ProductInformationViewModel
     {
-        public int ProductId { get; set; }
+        public int Id { get; set; }
 
-        public string ProductCode { get; set; }
+        public string Code { get; set; }
 
 
-        public string ProductName { get; set; }
+        public string Name { get; set; }
 
 
         public string Description { get; set; }

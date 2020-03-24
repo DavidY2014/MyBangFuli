@@ -22,6 +22,10 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
             _moduleInfoService = moduleInfoService;
         }
 
+        public BaseController()
+        { 
+        
+        }
 
         private UserInfo _userinfo;
         private  IUserRoleJurisdictionService _userRoleJurisdictionService;

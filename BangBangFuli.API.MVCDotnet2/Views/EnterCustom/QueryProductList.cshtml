@@ -75,7 +75,7 @@
                         foreach (var product in Model)
                         {
                             <tr class="laytable-cell-1-picurl">
-                                <td>
+                                @*<td>
                                     @Html.DisplayFor(modelItem => product.ProductId)
                                 </td>
                                 <td>
@@ -83,7 +83,7 @@
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => product.ProductName)
-                                </td>
+                                </td>*@
                                 <td>
                                     @Html.DisplayFor(modelItem => product.StockStatusName)
                                 </td>
@@ -100,8 +100,8 @@
                                     @Html.DisplayFor(modelItem => product.BatchName)
                                 </td>
                                 <td>
-                                    <a href="/EnterCustom/AddNewProduct?id=@(product.ProductId)" class="layui-btn layui-btn-small">编辑</a>
-                                    <a href="javascript:;" class="layui-btn layui-btn-danger layui-btn-small" onclick="del('@(product.ProductId)')">删除</a>
+                                    <a h@*ref="/EnterCustom/AddNewProduct?id=@(product.ProductId)" class="layui-btn layui-btn-small">编辑</a>
+                                    <a href="javascript:;" class="layui-btn layui-btn-danger layui-btn-small" onclick="del('@(product.ProductId)')">删除</a>*@
                                 </td>
                             </tr>
                         }

@@ -48,7 +48,11 @@ namespace BangBangFuli.API.MVCDotnet2
                 );
             });
 
-            services.AddDbContext<CouponSystemDBContext>(d => d.UseSqlServer(Configuration.GetConnectionString("H5BasicData")));
+            /*
+             * bug fix SqlException: 'OFFSET' 附近有语法错误。 在 FETCH 语句中选项 NEXT 的用法无效。
+            这个主要是在sql server 2008中，不支持FETCH和NEXT语句（sql server 2012才支持）。
+             */
+            services.AddDbContext<CouponSystemDBContext>(d => d.UseSqlServer(Configuration.GetConnectionString("H5BasicData"),b=> b.UseRowNumberForPaging()));
             services.AddScoped<IUnitOfWork, H5.API.EntityFrameworkCore.UnitOfWork<CouponSystemDBContext>>();//注入UOW依赖，确保每次请求都是同一个对象
             services.AddByAssembly("BangBangFuli.H5.API.EntityFrameworkCore", "IBaseRepository");
             services.AddByAssembly("BangBangFuli.H5.API.Application", "IAppService");

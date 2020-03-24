@@ -22,10 +22,11 @@ namespace BangBangFuli.H5.API.Application.Services.BasicDatas
            return   _productRepository.GetAll();
         }
 
-        public List<ProductInformation> GetByPageLimit(int page, int limit)
+        public Tuple<List<ProductInformation>, long> GetList(int pageIndex, int pageSize)
         {
-            return _productRepository.GetAll();
+            return _productRepository.GetList(pageIndex, pageSize);
         }
+
 
         public void Save(ProductInformation product)
         {

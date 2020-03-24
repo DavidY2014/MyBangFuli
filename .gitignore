@@ -33,3 +33,5 @@
 /BangBangFuli.API.MVCDotnet2/appsettings.Development.json
 /BangBangFuli.API.MVC/appsettings.Development.json
 /BangBangFuli.Models
+/test/obj
+/test/wwwroot

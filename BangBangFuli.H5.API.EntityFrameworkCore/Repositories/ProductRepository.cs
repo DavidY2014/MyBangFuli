@@ -23,6 +23,25 @@ namespace BangBangFuli.H5.API.EntityFrameworkCore.Repositories
             return Master.ProductInformations.ToList();
         }
 
+        public Tuple<List<ProductInformation>, long> GetList(int pageIndex, int pageSize)
+        {
+            try
+            {
+                List<ProductInformation> producntInfolist = new List<ProductInformation>();
+                long count = 0;
+                var query = Master.ProductInformations;
+                producntInfolist = query.OrderByDescending(x => x.Id).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+                producntInfolist = query.ToList();
+                count = query.LongCount();
+
+                return Tuple.Create(producntInfolist, count);
+            }
+            catch (Exception ex)
+            {
+            }
+            return Tuple.Create<List<ProductInformation>, long>(new List<ProductInformation>(), 0);
+        }
+
         public void Save(ProductInformation product)
         {
             Master.ProductInformations.Add(product);
