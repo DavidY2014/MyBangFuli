@@ -69,7 +69,7 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
         public IActionResult ProductListData(int page, int limit)
         {
             List<ProductInformationViewModel> productInfolist = new List<ProductInformationViewModel>();
-            //var users = _productInformationService.GetList("", page, limit);
+            //var users = _productInformationService.GetByPageLimit(page, limit);
             //if (users.Item1 != null && users.Item1.Count > 0)
             //{
             //    foreach (var user in users.Item1)

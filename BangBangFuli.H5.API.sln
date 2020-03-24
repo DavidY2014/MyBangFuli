@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BangBangFuli.Utils.ORM.Inte
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BangBangFuli.API.MVCDotnet2", "BangBangFuli.API.MVCDotnet2\BangBangFuli.API.MVCDotnet2.csproj", "{EB314929-5687-4A8C-A61D-C361D9ECF786}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BangBangFuli.Common", "BangBangFuli.Common\BangBangFuli.Common.csproj", "{064EEEE2-B6A0-472E-B793-CB798D90AF85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BangBangFuli.Common", "BangBangFuli.Common\BangBangFuli.Common.csproj", "{064EEEE2-B6A0-472E-B793-CB798D90AF85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -31,36 +31,33 @@ namespace BangBangFuli.API.MVCDotnet2
         /// </summary>
         public object Data { get; set; }
 
-        public ResponseOutput(string requestId)
-        {
-            RequestId = requestId;
-        }
 
         public ResponseOutput(string code, string message, string requestId)
-            : this(requestId)
+            
         {
             Code = code;
             Message = message;
+            this.RequestId = requestId;
         }
 
         public ResponseOutput(object data, string code, string message, string requestId)
-: this(requestId)
         {
             Code = code;
             Message = message;
             Data = data;
+            this.RequestId = requestId;
         }
 
         public ResponseOutput(object data, string requestId)
-            : this(requestId)
         {
             Data = data;
+            this.RequestId = requestId;
         }
 
         public ResponseOutput(object data, string messages, string requestId)
-            : this(data, requestId)
         {
             Message = messages;
+            this.RequestId = requestId;
         }
     }
 }
