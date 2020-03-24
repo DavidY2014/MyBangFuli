@@ -1,0 +1,53 @@
+﻿@model List<BannerViewModel>
+@{
+    ViewData["Title"] = "banner信息";
+}
+<h2>Banner信息</h2>
+<p>
+    <a asp-action="Create" class="btn btn-primary">添加Banner</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                ID(序号)
+            </th>
+            <th>
+                Banner批次号
+            </th>
+            <th>
+                批次名称
+            </th>
+            <th>
+                创建时间
+            </th>
+            <th>
+                操作
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BannerId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BatchId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateTime)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.BannerId" class="btn btn-primary m-1">编辑</a> |
+                <a asp-action="Details" asp-route-id="@item.BannerId" class="btn btn-primary m-1">详情</a> |
+                <a asp-action="Delete" asp-route-id="@item.BannerId" class="btn btn-primary m-1">删除</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

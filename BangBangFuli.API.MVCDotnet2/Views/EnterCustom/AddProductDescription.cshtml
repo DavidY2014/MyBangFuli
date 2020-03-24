@@ -1,0 +1,61 @@
+﻿@using BangBangFuli.H5.API.Core.Entities
+@model ProductInformation
+@{
+    ViewData["Title"] = "商品描述";
+    Layout = "~/BasePages/_Layout.cshtml";
+}
+<form class="layui-form" method="post" id="addform">
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">说明</label>
+        <div class="layui-input-block">
+            <textarea class="layui-textarea layui-hide" name="Rem" lay-verify="content" id="Rem" required></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-inline">
+            <button class="layui-btn" lay-submit lay-filter="logform">立即提交</button>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+        var layer
+        layui.use(['layer', 'form','layedit'], function () {
+            layer = layui.layer;
+            var form = layui.form;
+            var layedit = layui.layedit;
+            // 创建一个编辑器
+            layedit.set({
+                uploadImage: {
+                    url: '/UploadApi/uploadImage' //接口url
+                    , type: 'post' //默认post
+                }
+            });
+
+            var editIndex = layedit.build('Rem', {
+                height: 370 //设置编辑器高度
+            });
+            form.on('submit(logform)', function (data) {
+                layedit.sync(editIndex)
+                data.field.Rem = layedit.getContent(editIndex);
+
+                $.post("/EnterCustom/SaveProductDescriptionLog?ProductId=@Model.Id", data.field, function (res) {
+                    if (res.code == 1) {
+                        layer.msg('保存成功', { icon: 6 });
+                        window.location = '/EnterCustom/QueryProductList';
+                    } else {
+                        layer.msg('保存失败', { icon: 5 });
+                    }
+                })
+                return false;
+            });
+            form.verify({
+                Rem: function (value, item) { //value：表单的值、item：表单的DOM对象
+                    layedit.sync(editIndex);
+                    if (value.length < 30) {
+                        return '说明至少要50个字';
+                    }
+                }
+            });
+        })
+</script>

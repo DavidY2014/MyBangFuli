@@ -1,0 +1,65 @@
+﻿@model List<OrderViewModel>
+@{
+    ViewData["Title"] = "订单信息";
+}
+<h2>订单信息</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                订单号
+            </th>
+            <th>
+                券码
+            </th>
+            <th>
+                联系人
+            </th>
+            <th>
+                手机号码
+            </th>
+            <th>
+                地址
+            </th>
+            <th>
+                邮编
+            </th>
+            <th>
+                座机
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CouponCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Contactor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MobilePhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ZipCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telephone)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.OrderId" class="btn btn-primary m-1">详情</a> |
+                <a asp-action="Delete" asp-route-id="@item.OrderId" class="btn btn-primary m-1">删除</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

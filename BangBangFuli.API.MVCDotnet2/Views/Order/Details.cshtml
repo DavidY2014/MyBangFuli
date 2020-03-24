@@ -1,0 +1,35 @@
+﻿@model List<OrderDetailViewModel>
+@{
+    ViewData["Title"] = "订单Details";
+}
+
+<h1>订单 Details</h1>
+
+<div class="row justify-content-center m-3">
+    <div class="col-sm-8">
+        @foreach (var item in Model)
+        { 
+        
+        <div class="card">
+            <div class="card-header">
+                <h1>@item.ProductName</h1>
+            </div>
+
+            <div class="card-body text-center">
+                @*<img class="card-img-top" src="@photoPath" asp-append-version="true" />*@
+
+                <h4>产品编码 : @item.ProductCode</h4>
+                <h4>购买数量 : @item.ProductCount</h4>
+            </div>
+            @*<div class="card-footer text-center">
+                <a asp-action="Index" asp-controller="home" class="btn btn-primary">返回</a>
+                <a href="#" class="btn btn-primary">编辑</a>
+                <a href="#" class="btn btn-danger">删除</a>
+            </div>*@
+        </div>
+        }
+    </div>
+</div>
+<div>
+    <a asp-action="Index" class="btn btn-primary">返回列表</a>
+</div>

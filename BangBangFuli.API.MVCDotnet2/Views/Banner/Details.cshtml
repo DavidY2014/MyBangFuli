@@ -1,0 +1,23 @@
+﻿@model List<BannerDetailViewModel>
+@{
+    ViewData["Title"] = "Banner详情";
+}
+
+<h4>Banner详情</h4>
+<hr />
+<div class="row justify-content-center m-3">
+    <div class="col-sm-8">
+        <div class="card">
+            @foreach (var item in Model)
+            {
+                <div class="card-body text-center">
+                    <img class="card-img-top" src="../../images/@item.PhotoPath" asp-append-version="true" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<hr />
+<div>
+    <a asp-action="Index" class="btn btn-default">返回列表</a>
+</div>

@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Services\BasicDatas\Dto\**" />
+    <EmbeddedResource Remove="Services\BasicDatas\Dto\**" />
+    <None Remove="Services\BasicDatas\Dto\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="IdentityServer4" Version="2.5.3" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Redis" Version="2.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BangBangFuli.H5.API.Core\BangBangFuli.H5.API.Core.csproj" />
+    <ProjectReference Include="..\BangBangFuli.H5.API.EntityFrameworkCore\BangBangFuli.H5.API.EntityFrameworkCore.csproj" />
+  </ItemGroup>
+
+</Project>

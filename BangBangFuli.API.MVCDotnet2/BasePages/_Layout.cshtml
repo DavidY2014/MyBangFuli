@@ -1,0 +1,205 @@
+﻿@using BangBangFuli.H5.API.Core.Entities
+@{ 
+    UserInfo user = ViewData["user"] as UserInfo;
+    List<UserRoleJurisdiction> userrolejurlist = ViewData["userrolejurlist"] as List<UserRoleJurisdiction>;
+    List<ModuleInfo> modulelist = ViewData["modulelist"] as List<ModuleInfo>;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>@ViewData["Title"]</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="~/layui/css/layui.css">
+    <link rel="stylesheet" href="~/layui/css/main.css">
+    <script type="text/javascript" src="~/layui/layui.js"></script>
+    <script type="text/javascript" src="~/layui/jquery.js"></script>
+
+</head>
+<body class="layui-layout-body" leftmargin=0 topmargin=0 oncontextmenu='return false' ondragstart='return false' onselectstart ='return false'  onbeforecopy='return false' >
+    <div class="layui-layout layui-layout-admin">
+        <!-- 头部区域 -->
+        <div class="layui-header">
+            <div class="layui-logo">棒棒福利提货劵管理系统</div>
+            <ul class="layui-nav layui-layout-right">                
+                <li class="layui-nav-item">
+                    <a href="javascript:;">@(user!=null ? user.Name:"")</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" onclick="basemsg()">基本资料</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="/Account/LoginOut">退出</a>
+                </li>
+            </ul>
+        </div>
+        <!-- 侧边栏 -->
+        <div class="layui-side layui-bg-black">
+            <div class="layui-side-scroll">
+                <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                    <li class="layui-nav-item @(ViewBag.root=="console"?"layui-nav-itemed":"")"><a href="/EnterCustom/ConsoleIndex">工作台</a></li>
+                    @if (modulelist != null && modulelist.Count > 0 && userrolejurlist != null && userrolejurlist.Count > 0)
+                    {
+                        var module7 = modulelist.FirstOrDefault(x => x.Name == "账户管理");
+                        var module8 = modulelist.FirstOrDefault(x => x.Name == "模块管理");
+                        var module9 = modulelist.FirstOrDefault(x => x.Name == "角色管理");
+                        var module10 = modulelist.FirstOrDefault(x => x.Name == "用户管理");
+
+                        var module1 = modulelist.FirstOrDefault(x => x.Name == "商品管理");
+                        var module2 = modulelist.FirstOrDefault(x => x.Name == "头图管理");
+                        var module3 = modulelist.FirstOrDefault(x => x.Name == "提货券管理");
+                        var module4 = modulelist.FirstOrDefault(x => x.Name == "订单管理");
+                        var module5 = modulelist.FirstOrDefault(x => x.Name == "批次管理");
+                        var module6 = modulelist.FirstOrDefault(x => x.Name == "供应商管理");
+
+                        if (module7 != null)
+                        {
+                            var userjur = userrolejurlist.FirstOrDefault(x => x.ModuleID == module7.ID && x.IsQuery);
+
+                            if (userjur != null)
+                            {
+                                <li class="layui-nav-item  @(ViewBag.root=="account"?"layui-nav-itemed":"")">
+                                    <a class="" href="javascript:;">账户管理</a>
+                                    <dl class="layui-nav-child">
+                                        @if (module8 != null)
+                                        {
+                                            var modeule8_jur = userrolejurlist.FirstOrDefault(x => x.ModuleID == module8.ID && x.IsQuery);
+                                            if (modeule8_jur != null)
+                                            {
+                                                <dd>
+                                                    <a href="/Users/ModuleList">模块管理</a>
+                                                </dd>
+                                            }
+                                        }
+                                        @if (module9 != null)
+                                        {
+                                            var modeule9_jur = userrolejurlist.FirstOrDefault(x => x.ModuleID == module9.ID && x.IsQuery);
+                                            if (modeule9_jur != null)
+                                            {
+                                                <dd>
+                                                    <a href="/Users/RoleList">角色管理</a>
+                                                </dd>
+                                            }
+                                        }
+                                        @if (module10 != null)
+                                        {
+                                            var modeule10_jur = userrolejurlist.FirstOrDefault(x => x.ModuleID == module10.ID && x.IsQuery);
+                                            if (modeule10_jur != null)
+                                            {
+                                                <dd>
+                                                    <a href="/Users/UserList">用户管理</a>
+                                                </dd>
+                                            }
+                                        }
+
+                                    </dl>
+                                </li>
+                            }
+                        }
+
+
+
+                        if (module1 != null)
+                        {
+                            var module1_jur = userrolejurlist.FirstOrDefault(x => x.ModuleID == module1.ID && x.IsQuery);
+                            if (module1_jur != null)
+                            {
+                                <li class="layui-nav-item"><a href="/EnterCustom/QueryProductList">商品管理</a></li>
+                            }
+                        }
+                        if (module2 != null)
+                        {
+                            var module2_jur = userrolejurlist.FirstOrDefault(x => x.ModuleID == module2.ID && x.IsQuery);
+                            if (module2_jur != null)
+                            {
+                                <li class="layui-nav-item"><a href="/EnterCustom/QueryBannerList">头图管理</a></li>
+                            }
+
+                        }
+                        if (module3 != null)
+                        {
+                            var module3_jur = userrolejurlist.FirstOrDefault(x => x.ModuleID == module3.ID && x.IsQuery);
+                            if (module3_jur != null)
+                            {
+                                <li class="layui-nav-item"><a href="/EnterCustom/QueryCouponList">提货券管理</a></li>
+                            }
+                        }
+                        if (module4 != null)
+                        {
+                            var module4_jur = userrolejurlist.FirstOrDefault(x => x.ModuleID == module4.ID && x.IsQuery);
+                            if (module4_jur != null)
+                            {
+                                <li class="layui-nav-item"><a href="/EnterCustom/QueryOrderList">订单管理</a></li>
+                            }
+                        }
+                        if (module5 != null)
+                        {
+                            var module5_jur = userrolejurlist.FirstOrDefault(x => x.ModuleID == module5.ID && x.IsQuery);
+                            if (module5_jur != null)
+                            {
+                                <li class="layui-nav-item"><a href="/EnterCustom/QueryBatchList">批次管理</a></li>
+                            }
+                        }
+                        if (module6 != null)
+                        {
+                            var module6_jur = userrolejurlist.FirstOrDefault(x => x.ModuleID == module6.ID && x.IsQuery);
+                            if (module6_jur != null)
+                            {
+                                <li class="layui-nav-item"><a href="/EnterCustom/QuerySupplierList">供应商管理</a></li>
+                            }
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <!-- 内容区域 -->
+        <div class="layui-body">
+            @RenderBody()
+        </div>
+
+        <!-- 底部固定区域 -->
+        <div class="layui-footer">
+            © 开源CRM - @DateTime.Now.Year
+        </div>
+    </div>
+    <script>
+        var layer
+        layui.use('layer', function () {
+            layer = layui.layer;
+        }); 
+        var setamtonclick = function () {
+            layer.prompt({ title: '请输入您每月销售回款目标金额，并确认', formType: 3 }, function (text, index) {
+                var re = /^[0-9]+.?[0-9]*$/;
+                if (!re.test(text)) {
+                    layer.alert('请输入数字', {
+                        icon: 2,
+                        skin: 'layer-ext-moon'
+                    })
+                    return;
+                 }
+                $.get('/EnterCustom/SetAmtTarget?amt=' + text, function (res) { 
+                    layer.alert('设置成功!', {
+                        icon: 1,
+                        skin: 'layer-ext-moon'
+                    })
+                });
+            });
+        }
+        var basemsg = function () { 
+            layer.open({
+                type: 2,
+                title: '个人信息',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['200px', '20%'],
+                content: '/Users/UserMessage'
+            });
+        }
+    </script>
+    @RenderSection("Scripts", required: false)
+    
+</body>
+</html>

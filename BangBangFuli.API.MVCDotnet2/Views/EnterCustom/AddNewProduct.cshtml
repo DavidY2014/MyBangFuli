@@ -1,0 +1,129 @@
+﻿@using BangBangFuli.H5.API.Core.Entities
+@using BangBangFuli.H5.API.Core
+@model ProductInformation
+@{
+    ViewData["Title"] = "添加商品";
+    Layout = "~/BasePages/_Layout.cshtml";
+    List<BatchInformation> BatchInfoList = ViewBag.BatchInfos;
+}
+<blockquote class="layui-elem-quote">
+    添加商品信息
+</blockquote>
+<div class="manage-form-container">
+    <form class="layui-form" method="post"  id="addproductform" action="/EnterCustom/SaveProduct">
+        <div class="layui-form-item">
+            <label class="layui-form-label">商品编号</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input layui-form-text" name="ProductCode" id="ProductCode" value="@(Model!=null?Model.ProductCode:"")" placeholder="请输入商品编号" autocomplete="off" />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">商品名称</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input layui-form-text" name="ProductName" id="ProductName" value="@(Model!=null?Model.ProductName:"")" placeholder="请输入商品名称" autocomplete="off" />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">批次</label>
+            <div class="layui-input-block">
+                <select class="layui-form-select" name="BatchId" lay-filter="BatchId" lay-search>
+                    <option value=""></option>
+                    @if (BatchInfoList != null && BatchInfoList.Count > 0)
+                    {
+                        foreach (var info in BatchInfoList)
+                        {
+                            <option value="@info.Id" data-id="@info.Id">@info.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">类型</label>
+            <div class="layui-input-block">
+                <select class="layui-form-select" name="ClassType">
+                    <option value=""></option>
+                    <option value="1" @(Model != null && Model.Type == ClassTypeEnum.yuexiangmeiwei ? "selected" : "")>悦享生活</option>
+                    <option value="2" @(Model != null && Model.Type == ClassTypeEnum.jujiahaowu ? "selected" : "")>居家好物</option>
+                    <option value="3" @(Model != null && Model.Type == ClassTypeEnum.pingzhishenghuo ? "selected" : "")>品质生活</option>
+                    <option value="4" @(Model != null && Model.Type == ClassTypeEnum.chufangzhengxuan ? "selected" : "")>厨房甄选</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">商品状态</label>
+            <div class="layui-input-block">
+                <select class="layui-form-select" name="ProductStatusType">
+                    <option value=""></option>
+                    <option value="1" @(Model != null && Model.ProductStatus == ProductStatusTypeEnum.On ? "selected" : "")>上架</option>
+                    <option value="2" @(Model != null && Model.ProductStatus == ProductStatusTypeEnum.Down ? "selected" : "")>下架</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">库存状态</label>
+            <div class="layui-input-block">
+                <select class="layui-form-select" name="StockStatusType">
+                    <option value=""></option>
+                    <option value="1" @(Model != null && Model.StockType == StockStatusTypeEnum.Yes ? "selected" : "")>有库存</option>
+                    <option value="2" @(Model != null && Model.StockType == StockStatusTypeEnum.No ? "selected" : "")>无库存</option>
+                </select>
+            </div>
+        </div>
+        <input type="hidden" name="ID" value="@(Model!=null ? Model.Id:0)" id="ID" />
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">保存</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script src="~/layui/jquery.validate.js"></script>
+    <script src="~/layui/jquery.form.js"></script>
+    <script type="text/javascript">
+        layui.use(['form', 'element', 'layer'], function () {
+            var layer = layui.layer
+            var form = layui.form
+        })
+
+
+       $('#addproductform').validate({
+            ignore:"",
+            rules: {
+                ProductCode: {
+                    required: true
+                },
+                ProductName: {
+                    required: true
+                },
+            },
+            messages: {
+                ProductCode: {
+                    maxlength: "最多20个字"
+                },
+                ProductName: {
+                    required: "请选择现在所处的阶段"
+                }
+            },
+            submitHandler: function (form) {
+                layer.load(0, { shade: false })
+                $(form).ajaxSubmit(function (res) {
+                    if (res.code == 1) {
+                        layer.msg('保存成功', { icon: 6 });
+                        window.location = '/EnterCustom/AddProductPhotos?ProductId=' + res.id
+                    } else {
+                        layer.msg('保存失败', { icon: 5 });
+                    }
+                })
+            }
+        })
+
+
+
+
+
+    </script>
+}
