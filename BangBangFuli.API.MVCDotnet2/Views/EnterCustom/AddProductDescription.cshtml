@@ -42,7 +42,7 @@
                 $.post("/EnterCustom/SaveProductDescriptionLog?ProductId=@Model.Id", data.field, function (res) {
                     if (res.code == 1) {
                         layer.msg('保存成功', { icon: 6 });
-                        window.location = '/EnterCustom/QueryProductList';
+                        window.location = '/EnterCustom/ProductList';
                     } else {
                         layer.msg('保存失败', { icon: 5 });
                     }

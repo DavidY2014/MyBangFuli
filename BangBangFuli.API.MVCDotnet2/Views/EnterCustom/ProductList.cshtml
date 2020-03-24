@@ -45,7 +45,7 @@
                             layer.msg('系统管理员不能删除', { icon: 2});
                             return
                          }
-                        $.get('/EnterCustom/DelUser?id=' + data.id, function (res) {
+                        $.get('/EnterCustom/DelProduct?id=' + data.Id, function (res) {
                             if (res.code == 1) {
                                 obj.del(); //删除对应行（tr）的DOM结构
                                 layer.close(index);

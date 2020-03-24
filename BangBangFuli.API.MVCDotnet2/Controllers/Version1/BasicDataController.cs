@@ -63,7 +63,7 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
                     var bannerDetails = item.BannerDetails;
                     if (bannerDetails != null)
                     {
-                        photoUniqueNames.AddRange(bannerDetails.Select(s => s.PhotoPath).ToList());
+                        photoUniqueNames.AddRange(bannerDetails.Select(s => s.PhotoPath.Replace('\\','/')).ToList());
                     }
                 }
                 return new ResponseOutput(photoUniqueNames, "0", string.Empty, HttpContext.TraceIdentifier);
@@ -180,8 +180,8 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
                         {
                             detailDtos.Add(new ProductDetailOutputDto()
                             {
-                                PhotoPath = productDetail.PhotoPath
-                            });
+                                PhotoPath = productDetail.PhotoPath.Replace('\\', '/')
+                            }) ;
                         }
                     }
 
@@ -194,7 +194,7 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
                         StockStatus = (int)product.StockType,
                         ClassType = (int)product.Type,
                         ProductStatus = (int)product.ProductStatus,
-                        Photos = detailDtos.Select(item => item.PhotoPath).ToList()
+                        Photos = detailDtos.Select(item => item.PhotoPath.Replace('\\','/')).ToList()
                     });
                 }
                 return new ResponseOutput(productDtos, "0", string.Empty, HttpContext.TraceIdentifier);
@@ -230,7 +230,7 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
                     {
                         detailDtos.Add(new ProductDetailOutputDto()
                         {
-                            PhotoPath = productDetail.PhotoPath
+                            PhotoPath = productDetail.PhotoPath.Replace('\\','/')
                         });
                     }
                 }
@@ -243,7 +243,7 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
                     ClassType = (int)product.Type,
                     StockStatus = (int)product.StockType,
                     ProductStatus = (int)product.ProductStatus,
-                    Photos = detailDtos.Select(item => item.PhotoPath).ToList()
+                    Photos = detailDtos.Select(item => item.PhotoPath.Replace('\\','/')).ToList()
                 };
                 return new ResponseOutput(dto, "0", string.Empty, HttpContext.TraceIdentifier);
             }
@@ -278,7 +278,7 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
                     {
                         detailDtos.Add(new ProductDetailOutputDto()
                         {
-                            PhotoPath = productDetail.PhotoPath
+                            PhotoPath = productDetail.PhotoPath.Replace('\\','/')
                         });
                     }
 
@@ -290,7 +290,7 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
                         ClassType = (int)product.Type,
                         StockStatus = (int)product.StockType,
                         ProductStatus = (int)product.ProductStatus,
-                        Photos = detailDtos.Select(item => item.PhotoPath).ToList()
+                        Photos = detailDtos.Select(item => item.PhotoPath.Replace('\\','/')).ToList()
                     });
                 }
 
