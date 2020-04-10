@@ -8,7 +8,7 @@ namespace BangBangFuli.API.MVCDotnet2.Models
     [Serializable]
     public class UserViewModel
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         /// <summary>
         /// 用户名
         /// </summary>

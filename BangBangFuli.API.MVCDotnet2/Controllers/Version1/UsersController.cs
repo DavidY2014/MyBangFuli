@@ -167,7 +167,7 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
                 {
                     UserViewModel vm = new UserViewModel();
                     vm.CreateTime = user.CreateTime.ToString("yyyy-MM-dd");
-                    vm.ID = user.Id;
+                    vm.Id = user.Id;
                     vm.Name = user.Name;
                     if (user.RoleID > 0)
                     {

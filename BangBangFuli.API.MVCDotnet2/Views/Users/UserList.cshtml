@@ -7,15 +7,15 @@
     用户管理中展示了所有的用户信息，可以进行删除添加等操作
     <a class="layui-btn layui-btn-normal" href="/Users/AddUser">添加用户</a>
 </blockquote>
-<table class="layui-table" lay-data="{height:600, url:'/Users/UserListData', page:true, id:'idTest'}" lay-filter="demo">
+<table class="layui-table" lay-data="{height:600, url:'/Users/UserListData', page:true, id:'IdTest'}" lay-filter="demo">
     <thead>
         <tr>
-            <th lay-data="{field:'id', width:80, sort: true, fixed: true}">ID</th>
-            <th lay-data="{field:'userName', width:80}">用户名</th>
-            <th lay-data="{field:'name', width:180, sort: true}">姓名</th>
-            <th lay-data="{field:'telPhone', width:180}">电话号</th>
-            <th lay-data="{field:'roleName', width:177}">角色</th>
-            <th lay-data="{field:'createTime', width:177}">创建时间</th>
+            <th lay-data="{field:'Id', width:80, sort: true, fixed: true}">ID</th>
+            <th lay-data="{field:'UserName', width:80}">用户名</th>
+            <th lay-data="{field:'Name', width:180, sort: true}">姓名</th>
+            <th lay-data="{field:'TelPhone', width:180}">电话号</th>
+            <th lay-data="{field:'RoleName', width:177}">角色</th>
+            <th lay-data="{field:'CreateTime', width:177}">创建时间</th>
             <th lay-data="{fixed: 'right', width:200, align:'center', toolbar: '#barDemo'}"></th>
         </tr>
     </thead>
@@ -44,7 +44,7 @@
                             layer.msg('系统管理员不能删除', { icon: 2});
                             return
                          }
-                        $.get('/Users/DelUser?id=' + data.id, function (res) {
+                        $.get('/Users/DelUser?id=' + data.Id, function (res) {
                             if (res.code == 1) {
                                 obj.del(); //删除对应行（tr）的DOM结构
                                 layer.close(index);
@@ -56,7 +56,7 @@
                         //向服务端发送删除指令
                     });
                 } else if (layEvent === 'edity') {
-                    window.location = '/Users/AddUser?id=' + data.id;
+                    window.location = '/Users/AddUser?id=' + data.Id;
                  }
             });
         });
