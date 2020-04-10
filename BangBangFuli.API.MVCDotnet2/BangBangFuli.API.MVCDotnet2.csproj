@@ -32,4 +32,12 @@
     <Folder Include="wwwroot\videos\" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Content Update="Views\Banner\QueryBannerList.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
