@@ -224,7 +224,7 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers.Version1
 
 
         /// <summary>
-        ///  保存描述内容
+        ///  保存描述内容,图片中要显示绝对路径，不然前端渲染比较麻烦
         /// </summary>
         /// <returns></returns>
 
@@ -233,6 +233,9 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers.Version1
         {
             var productInfo = _productInformationService.GetProductById(ProductId);
             productInfo.Description = Request.Form["Rem"].TryToString();
+            string[] srcinfos =  TextParse.GetHtmlImageUrlList(productInfo.Description);
+
+
             _productInformationService.UpdateProduct(productInfo);
             return Json(new { code = 1, msg = "OK" });
         }
