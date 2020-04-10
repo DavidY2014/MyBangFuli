@@ -8,7 +8,7 @@ namespace BangBangFuli.API.MVCDotnet2.Models
 {
     public class OrderViewModel
     {
-        public int OrderId { get; set; }
+        public int Id { get; set; }
 
         [Display(Name = "订单号")]
         public string OrderCode { get; set; }

@@ -49,7 +49,7 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers.Version1
                 {
                     orderList.Add(new OrderViewModel
                     {
-                        OrderId = order.Id,
+                        Id = order.Id,
                         OrderCode = order.OrderCode,
                         CouponCode = order.CouponCode,
                         Contactor = order.Contactor,
