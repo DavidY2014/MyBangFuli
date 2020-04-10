@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using BangBangFuli.API.MVCDotnet2.Controllers.Dtos;
@@ -46,7 +47,7 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
 
 
         /// <summary>
-        /// 1,获取批次号获取banner图片数组
+        /// 1,获取批次号获取banner图片数组,http://106.54.112.131:5001/
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -63,7 +64,7 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
                     var bannerDetails = item.BannerDetails;
                     if (bannerDetails != null)
                     {
-                        photoUniqueNames.AddRange(bannerDetails.Select(s => s.PhotoPath.Replace('\\','/')).ToList());
+                        photoUniqueNames.AddRange(bannerDetails.Select(s => Path.Combine("http://106.54.112.131:5001/", s.PhotoPath.Replace('\\', '/'))).ToList());
                     }
                 }
                 return new ResponseOutput(photoUniqueNames, "0", string.Empty, HttpContext.TraceIdentifier);
@@ -194,7 +195,7 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
                         StockStatus = (int)product.StockType,
                         ClassType = (int)product.Type,
                         ProductStatus = (int)product.ProductStatus,
-                        Photos = detailDtos.Select(item => item.PhotoPath.Replace('\\','/')).ToList()
+                        Photos = detailDtos.Select(item => Path.Combine("http://106.54.112.131:5001/",item.PhotoPath.Replace('\\','/'))).ToList()
                     });
                 }
                 return new ResponseOutput(productDtos, "0", string.Empty, HttpContext.TraceIdentifier);
@@ -243,7 +244,7 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
                     ClassType = (int)product.Type,
                     StockStatus = (int)product.StockType,
                     ProductStatus = (int)product.ProductStatus,
-                    Photos = detailDtos.Select(item => item.PhotoPath.Replace('\\','/')).ToList()
+                    Photos = detailDtos.Select(item => Path.Combine("http://106.54.112.131:5001/",item.PhotoPath.Replace('\\','/'))).ToList()
                 };
                 return new ResponseOutput(dto, "0", string.Empty, HttpContext.TraceIdentifier);
             }
@@ -290,7 +291,7 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
                         ClassType = (int)product.Type,
                         StockStatus = (int)product.StockType,
                         ProductStatus = (int)product.ProductStatus,
-                        Photos = detailDtos.Select(item => item.PhotoPath.Replace('\\','/')).ToList()
+                        Photos = detailDtos.Select(item => Path.Combine("http://106.54.112.131:5001/",item.PhotoPath.Replace('\\','/'))).ToList()
                     });
                 }
 
