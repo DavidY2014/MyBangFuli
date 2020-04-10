@@ -20,6 +20,24 @@ namespace BangBangFuli.H5.API.EntityFrameworkCore.Repositories
             return Master.Coupons.ToList();
         }
 
+        public Tuple<List<Coupon>, long> GetList(int pageIndex, int pageSize)
+        {
+            try
+            {
+                List<Coupon> couponList = new List<Coupon>();
+                long count = 0;
+                var query = Master.Coupons;
+                couponList = query.OrderByDescending(x => x.Id).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+                couponList = query.ToList();
+                count = query.LongCount();
+
+                return Tuple.Create(couponList, count);
+            }
+            catch (Exception ex)
+            {
+            }
+            return Tuple.Create<List<Coupon>, long>(new List<Coupon>(), 0);
+        }
 
         public int AddCoupon(Coupon couponInfo)
         {

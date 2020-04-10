@@ -28,28 +28,36 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers.Version1
             _batchInformationService = batchInformationService;
         }
 
+        public IActionResult CouponList()
+        {
+            return View();
+        }
+
         /// <summary>
-        /// 券列表页
+        /// 头图页面
         /// </summary>
         /// <returns></returns>
-        public IActionResult QueryCouponList()
+        [HttpGet]
+        public IActionResult CouponListData(int page, int limit)
         {
-            var couponViewModelList = new List<CouponViewModel>();
-            var coupons = _couponService.GetAll();
-            foreach (var item in coupons)
+            List<CouponViewModel> couponList = new List<CouponViewModel>();
+            var couponInfos = _couponService.GetList(page, limit);
+            if (couponInfos.Item1 != null && couponInfos.Item1.Count > 0)
             {
-                couponViewModelList.Add(new CouponViewModel
+                foreach (var batch in couponInfos.Item1)
                 {
-                    Id = item.Id,
-                    Code = item.Code,
-                    Password = item.Password,
-                    ValidityDate = item.ValidityDate,
-                    AvaliableCount = item.AvaliableCount,
-                    TotalCount = item.TotalCount
-                });
+                    couponList.Add(new CouponViewModel
+                    {
+                        Id = batch.Id,
+                        Code = batch.Code,
+                        Password = batch.Password,
+                        ValidityDate = batch.ValidityDate,
+                        AvaliableCount = batch.AvaliableCount,
+                        TotalCount = batch.TotalCount
+                    });
+                }
             }
-
-            return View(couponViewModelList);
+            return Json(new { code = 0, msg = "", count = couponInfos.Item2, data = couponList.ToArray() });
         }
 
         /// <summary>

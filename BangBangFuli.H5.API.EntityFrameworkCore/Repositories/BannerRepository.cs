@@ -15,6 +15,26 @@ namespace BangBangFuli.H5.API.EntityFrameworkCore.Repositories
 
         }
 
+        public Tuple<List<Banner>, long> GetList(int pageIndex, int pageSize)
+        {
+            try
+            {
+                List<Banner> bannerInfoList = new List<Banner>();
+                long count = 0;
+                var query = Master.Banners;
+                bannerInfoList = query.OrderByDescending(x => x.Id).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+                bannerInfoList = query.ToList();
+                count = query.LongCount();
+
+                return Tuple.Create(bannerInfoList, count);
+            }
+            catch (Exception ex)
+            {
+            }
+            return Tuple.Create<List<Banner>, long>(new List<Banner>(), 0);
+        }
+
+
         public void CreateNew(Banner banner)
         {
             Master.Add(banner);

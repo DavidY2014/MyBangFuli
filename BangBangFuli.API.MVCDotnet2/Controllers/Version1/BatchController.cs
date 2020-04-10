@@ -25,25 +25,36 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers.Version1
             _moduleInfoService = moduleInfoService;
             _batchInformationService = batchInformationService;
         }
+
+
+        public IActionResult BatchList()
+        {
+            return View();
+        }
+
         /// <summary>
-        /// 批次列表页
+        /// 头图页面
         /// </summary>
         /// <returns></returns>
-        public IActionResult QueryBatchList()
+        [HttpGet]
+        public IActionResult BatchListData(int page, int limit)
         {
-            List<BatchViewModel> batchViewModels = new List<BatchViewModel>();
-            List<BatchInformation> batchInfos = _batchInformationService.GetAll();
-            foreach (var batch in batchInfos)
+            List<BatchViewModel> batchList = new List<BatchViewModel>();
+            var batchInfos = _batchInformationService.GetList(page, limit);
+            if (batchInfos.Item1 != null && batchInfos.Item1.Count > 0)
             {
-                batchViewModels.Add(new BatchViewModel
+                foreach (var batch in batchInfos.Item1)
                 {
-                    Id = batch.Id,
-                    BatchId = batch.Id,
-                    Name = batch.Name,
-                    CreateTime = batch.CreateTime
-                });
+                    batchList.Add(new BatchViewModel
+                    {
+                        Id = batch.Id,
+                        BatchId = batch.Id,
+                        Name = batch.Name,
+                        CreateTime = batch.CreateTime
+                    });
+                }
             }
-            return View(batchViewModels);
+            return Json(new { code = 0, msg = "", count = batchInfos.Item2, data = batchList.ToArray() });
         }
 
         /// <summary>

@@ -10,6 +10,7 @@ namespace BangBangFuli.H5.API.Core.IRepositories.BasicDatas
     {
         List<BatchInformation> GetAll();
 
+        Tuple<List<BatchInformation>, long> GetList(int pageIndex, int pageSize);
         void CreateNew(BatchInformation batchInfo);
         BatchInformation GetBatchInfoById(int Id);
 

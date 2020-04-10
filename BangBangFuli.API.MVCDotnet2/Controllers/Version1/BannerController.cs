@@ -38,26 +38,38 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers.Version1
             _bannerDetailService = bannerDetailService;
         }
 
+
+
+        public IActionResult BannerList()
+        {
+            return View();
+        }
+
         /// <summary>
-        /// banner 列表页面
+        /// 头图页面
         /// </summary>
         /// <returns></returns>
-        public IActionResult QueryBannerList()
+        [HttpGet]
+        public IActionResult BannerListData(int page, int limit)
         {
-            List<BannerViewModel> bannerViewModels = new List<BannerViewModel>();
-            List<Banner> banners = _bannerService.GetAll();
-            foreach (var banner in banners)
+            List<BannerViewModel> bannerList = new List<BannerViewModel>();
+            var bannerInfos = _bannerService.GetList(page, limit);
+            if (bannerInfos.Item1 != null && bannerInfos.Item1.Count > 0)
             {
-                bannerViewModels.Add(new BannerViewModel
+                foreach (var banner in bannerInfos.Item1)
                 {
-                    BannerId = banner.Id,
-                    BatchId = banner.BatchId,
-                    Name = banner.Name,
-                    CreateTime = banner.CreateTime
-                });
+                    bannerList.Add(new BannerViewModel
+                    {
+                        BannerId = banner.Id,
+                        BatchId = banner.BatchId,
+                        Name = banner.Name,
+                        CreateTime = banner.CreateTime
+                    });
+                }
             }
-            return View(bannerViewModels);
+            return Json(new { code = 0, msg = "", count = bannerInfos.Item2, data = bannerList.ToArray() });
         }
+
 
         /// <summary>
         /// 新建banner视图
@@ -104,6 +116,13 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers.Version1
                     return Json(new { code = 0, msg = "保存失败" });
                 }
             }
+        }
+
+        [HttpPost]
+        public IActionResult SavePhotos()
+        {
+            int id = Request.Form["ID"].TryToInt(0);
+            return Json(new { code = 1, msg = "OK", id = id });
         }
 
         /// <summary>

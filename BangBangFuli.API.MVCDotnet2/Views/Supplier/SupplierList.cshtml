@@ -1,22 +1,20 @@
 ﻿@{
-    ViewData["Title"] = "商品管理";
+    ViewData["Title"] = "供应商管理";
     Layout = "~/BasePages/_Layout.cshtml";
 }
 <blockquote class="layui-elem-quote">
-    商品管理中展示了所有的商品信息，可以进行删除添加等操作
-    <a class="layui-btn layui-btn-normal" href="/Products/AddProduct">添加商品</a>
+    供应商管理中展示了所有的供应商信息，可以进行删除添加等操作
+    <a class="layui-btn layui-btn-normal" href="/Supplier/AddNewSupply">添加供应商</a>
 </blockquote>
-<table class="layui-table" lay-data="{height:600, url:'/Products/ProductListData', page:true, id:'idTest'}" lay-filter="demo">
+<table class="layui-table" lay-data="{height:600, url:'/Supplier/SupplierListData', page:true, id:'idTest'}" lay-filter="demo">
     <thead>
         <tr>
             <th lay-data="{field:'Id', width:80, sort: true, fixed: true}">ID</th>
-            <th lay-data="{field:'Code', width:180}">商品编码</th>
-            <th lay-data="{field:'Name', width:180, sort: true}">商品名称</th>
-            <th lay-data="{field:'StockStatusType', width:180}">是否有库存</th>
-            <th lay-data="{field:'ProductStatusType', width:177}">状态</th>
-            <th lay-data="{field:'ClassType', width:177}">分类</th>
-            <th lay-data="{field:'BatchId', width:177}">批次号</th>
-            <th lay-data="{field:'BatchName', width:177}">批次名称</th>
+            @*<th lay-data="{field:'Code', width:180}">券码</th>
+            <th lay-data="{field:'Password', width:180, sort: true}">密码</th>
+            <th lay-data="{field:'ValidityDate', width:180}">有效期</th>
+            <th lay-data="{field:'AvaliableCount', width:180}">可用次数</th>
+            <th lay-data="{field:'TotalCount', width:180}">总次数</th>*@
             <th lay-data="{fixed: 'right', width:200, align:'center', toolbar: '#barDemo'}"></th>
         </tr>
     </thead>
@@ -45,7 +43,7 @@
                             layer.msg('系统管理员不能删除', { icon: 2});
                             return
                          }
-                        $.get('/Products/DelProduct?id=' + data.Id, function (res) {
+                        $.get('/Supplier/DelSupplier?id=' + data.Id, function (res) {
                             if (res.code == 1) {
                                 obj.del(); //删除对应行（tr）的DOM结构
                                 layer.close(index);
@@ -57,7 +55,8 @@
                         //向服务端发送删除指令
                     });
                 } else if (layEvent === 'edity') {
-                    window.location = '/Products/AddProduct?id=' + data.id;
+                    //window.location = '/Banner/AddProduct?id=' + data.id;
+                    //window.location = '/Banner/AddBanner?id=' + data.id;
                  }
             });
         });

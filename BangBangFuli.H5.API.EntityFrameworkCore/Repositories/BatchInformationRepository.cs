@@ -15,6 +15,26 @@ namespace BangBangFuli.H5.API.EntityFrameworkCore.Repositories
 
         }
 
+        public Tuple<List<BatchInformation>, long> GetList(int pageIndex, int pageSize)
+        {
+            try
+            {
+                List<BatchInformation> batchInfoList = new List<BatchInformation>();
+                long count = 0;
+                var query = Master.BatchInformations;
+                batchInfoList = query.OrderByDescending(x => x.Id).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+                batchInfoList = query.ToList();
+                count = query.LongCount();
+
+                return Tuple.Create(batchInfoList, count);
+            }
+            catch (Exception ex)
+            {
+            }
+            return Tuple.Create<List<BatchInformation>, long>(new List<BatchInformation>(), 0);
+        }
+
+
         public List<BatchInformation> GetAll()
         {
             return Master.BatchInformations.ToList();

@@ -10,6 +10,7 @@ namespace BangBangFuli.H5.API.Core.IRepositories.BasicDatas
     {
         void CreateNewOrder(Order order);
 
+        Tuple<List<Order>, long> GetList(int pageIndex, int pageSize);
         List<Order> GetAll();
 
         Order GetOrderById(int orderId);

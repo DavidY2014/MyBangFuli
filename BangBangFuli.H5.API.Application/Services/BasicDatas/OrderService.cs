@@ -18,6 +18,11 @@ namespace BangBangFuli.H5.API.Application.Services.BasicDatas
             _unitOfWork = unitOfWork;
         }
 
+        public Tuple<List<Order>, long> GetList(int pageIndex, int pageSize)
+        {
+            return _orderRepository.GetList(pageIndex, pageSize);
+        }
+
         public void CreateNewOrder(Order order)
         {
             _orderRepository.CreateNewOrder(order);

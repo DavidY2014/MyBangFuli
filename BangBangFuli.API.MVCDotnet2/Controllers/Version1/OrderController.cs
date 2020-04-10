@@ -29,32 +29,41 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers.Version1
             _orderDetailService = orderDetailService;
         }
 
+        public IActionResult OrderList()
+        {
+            return View();
+        }
 
         /// <summary>
-        /// 订单页面
+        /// 头图页面
         /// </summary>
         /// <returns></returns>
-        public IActionResult QueryOrderList()
+        [HttpGet]
+        public IActionResult OrderListData(int page, int limit)
         {
-            List<OrderViewModel> orderViewModels = new List<OrderViewModel>();
-            var orders = _orderService.GetAll();
-            foreach (var order in orders)
+            List<OrderViewModel> orderList = new List<OrderViewModel>();
+            var orderInfos = _orderService.GetList(page, limit);
+            if (orderInfos.Item1 != null && orderInfos.Item1.Count > 0)
             {
-                orderViewModels.Add(new OrderViewModel
+                foreach (var order in orderInfos.Item1)
                 {
-                    OrderId = order.Id,
-                    OrderCode = order.OrderCode,
-                    CouponCode = order.CouponCode,
-                    Contactor = order.Contactor,
-                    MobilePhone = order.MobilePhone,
-                    Address = order.Address,
-                    ZipCode = order.ZipCode,
-                    Telephone = order.Telephone
-                });
+                    orderList.Add(new OrderViewModel
+                    {
+                        OrderId = order.Id,
+                        OrderCode = order.OrderCode,
+                        CouponCode = order.CouponCode,
+                        Contactor = order.Contactor,
+                        MobilePhone = order.MobilePhone,
+                        Address = order.Address,
+                        ZipCode = order.ZipCode,
+                        Telephone = order.Telephone
+                    });
+                }
             }
-
-            return View(orderViewModels);
+            return Json(new { code = 0, msg = "", count = orderInfos.Item2, data = orderList.ToArray() });
         }
+
+
 
         [HttpGet]
         public IActionResult DelOrder(int id)

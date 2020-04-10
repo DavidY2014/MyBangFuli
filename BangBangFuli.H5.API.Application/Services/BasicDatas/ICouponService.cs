@@ -10,6 +10,7 @@ namespace BangBangFuli.H5.API.Application.Services.BasicDatas
 
         bool VerifyCoupon(string code, string password);
 
+        Tuple<List<Coupon>, long> GetList(int pageIndex, int pageSize);
         Coupon GetCouponByCode(string code);
 
         bool CheckIfCouponAlreadyExist(string code);

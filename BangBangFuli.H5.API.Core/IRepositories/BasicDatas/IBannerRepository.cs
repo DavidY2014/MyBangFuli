@@ -11,6 +11,7 @@ namespace BangBangFuli.H5.API.Core.IRepositories.BasicDatas
         void CreateNew(Banner banner);
         int GetMax();
 
+        Tuple<List<Banner>, long> GetList(int pageIndex, int pageSize);
         List<Banner> GetAll();
 
         void UpdateBanner(Banner banner);

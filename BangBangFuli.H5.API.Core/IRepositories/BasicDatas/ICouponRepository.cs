@@ -1,5 +1,6 @@
 ﻿using BangBangFuli.H5.API.Core.Entities;
 using BangBangFuli.Utils.ORM.Interface;
+using System;
 using System.Collections.Generic;
 
 namespace BangBangFuli.H5.API.Core.IRepositories
@@ -8,6 +9,7 @@ namespace BangBangFuli.H5.API.Core.IRepositories
     {
         List<Coupon> GetAll();
 
+        Tuple<List<Coupon>, long> GetList(int pageIndex, int pageSize);
         Coupon GetCouponByCode(string code);
 
         int AddCoupon(Coupon couponInfo);

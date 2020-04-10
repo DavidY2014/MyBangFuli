@@ -21,6 +21,12 @@ namespace BangBangFuli.H5.API.Application.Services.BasicDatas
             _unitOfWork = unitOfWork;
         }
 
+        public Tuple<List<Coupon>, long> GetList(int pageIndex, int pageSize)
+        {
+            return _couponRepository.GetList(pageIndex, pageSize);
+        }
+
+
         public bool VerifyCoupon(string code, string password)
         {
             return _couponRepository.VerifyCoupon(code, password);

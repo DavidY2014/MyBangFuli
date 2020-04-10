@@ -17,6 +17,12 @@ namespace BangBangFuli.H5.API.Application.Services.BasicDatas
             _batchInformationRepository = batchInformationRepository;
             _unitOfWork = unitOfWork;
         }
+
+        public Tuple<List<BatchInformation>, long> GetList(int pageIndex, int pageSize)
+        {
+            return _batchInformationRepository.GetList(pageIndex, pageSize);
+        }
+
         public List<BatchInformation> GetAll()
         {
             return _batchInformationRepository.GetAll();

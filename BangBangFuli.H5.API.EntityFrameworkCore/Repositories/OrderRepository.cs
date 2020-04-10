@@ -15,6 +15,25 @@ namespace BangBangFuli.H5.API.EntityFrameworkCore.Repositories
 
         }
 
+        public Tuple<List<Order>, long> GetList(int pageIndex, int pageSize)
+        {
+            try
+            {
+                List<Order> orderList = new List<Order>();
+                long count = 0;
+                var query = Master.Orders;
+                orderList = query.OrderByDescending(x => x.Id).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+                orderList = query.ToList();
+                count = query.LongCount();
+
+                return Tuple.Create(orderList, count);
+            }
+            catch (Exception ex)
+            {
+            }
+            return Tuple.Create<List<Order>, long>(new List<Order>(), 0);
+        }
+
         public void CreateNewOrder(Order order)
         {
             Master.Orders.Add(order);

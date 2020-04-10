@@ -18,6 +18,13 @@ namespace BangBangFuli.H5.API.Application.Services.BasicDatas
             _unitOfWork = unitOfWork;
         }
 
+
+        public Tuple<List<Banner>, long> GetList(int pageIndex, int pageSize)
+        {
+            return _bannerRepository.GetList(pageIndex, pageSize);
+        }
+
+
         public void Save(Banner banner)
         {
             _bannerRepository.CreateNew(banner);
