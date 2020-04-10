@@ -39,10 +39,10 @@
                 layedit.sync(editIndex)
                 data.field.Rem = layedit.getContent(editIndex);
 
-                $.post("/EnterCustom/SaveProductDescriptionLog?ProductId=@Model.Id", data.field, function (res) {
+                $.post("/Products/SaveProductDescriptionLog?ProductId=@Model.Id", data.field, function (res) {
                     if (res.code == 1) {
                         layer.msg('保存成功', { icon: 6 });
-                        window.location = '/EnterCustom/ProductList';
+                        window.location = '/Products/ProductList';
                     } else {
                         layer.msg('保存失败', { icon: 5 });
                     }

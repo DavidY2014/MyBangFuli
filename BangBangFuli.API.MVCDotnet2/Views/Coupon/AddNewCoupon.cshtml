@@ -9,7 +9,7 @@
     添加券码信息
 </blockquote>
 <div class="manage-form-container">
-    <form class="layui-form" method="post" id="addform" action="/EnterCustom/SaveCoupon">
+    <form class="layui-form" method="post" id="addform" action="/Coupon/SaveCoupon">
         <div class="layui-form-item">
             <label class="layui-form-label">编号</label>
             <div class="layui-input-block">
@@ -86,7 +86,7 @@
                 $(form).ajaxSubmit(function (res) {
                     if (res.code == 1) {
                         layer.msg('保存成功', { icon: 6 });
-                        window.location = '/EnterCustom/QueryCouponList';
+                        window.location = '/Coupon/QueryCouponList';
                     }
                     else if (res.code == -1)
                     {

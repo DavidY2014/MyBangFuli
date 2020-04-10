@@ -10,7 +10,7 @@
     添加商品信息
 </blockquote>
 <div class="manage-form-container">
-    <form class="layui-form" method="post"  id="addproductform" action="/EnterCustom/SaveProduct">
+    <form class="layui-form" method="post" id="addproductform" action="/Products/SaveProduct">
         <div class="layui-form-item">
             <label class="layui-form-label">商品编号</label>
             <div class="layui-input-block">
@@ -113,7 +113,7 @@
                 $(form).ajaxSubmit(function (res) {
                     if (res.code == 1) {
                         layer.msg('保存成功', { icon: 6 });
-                        window.location = '/EnterCustom/AddProductPhotos?ProductId=' + res.id
+                        window.location = '/Products/AddProductPhotos?ProductId=' + res.id
                     } else {
                         layer.msg('保存失败', { icon: 5 });
                     }

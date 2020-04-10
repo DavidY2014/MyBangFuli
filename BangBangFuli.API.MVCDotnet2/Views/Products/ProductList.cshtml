@@ -4,9 +4,9 @@
 }
 <blockquote class="layui-elem-quote">
     用户管理中展示了所有的商品信息，可以进行删除添加等操作
-    <a class="layui-btn layui-btn-normal" href="/EnterCustom/AddProduct">添加商品</a>
+    <a class="layui-btn layui-btn-normal" href="/Products/AddProduct">添加商品</a>
 </blockquote>
-<table class="layui-table" lay-data="{height:600, url:'/EnterCustom/ProductListData', page:true, id:'idTest'}" lay-filter="demo">
+<table class="layui-table" lay-data="{height:600, url:'/Products/ProductListData', page:true, id:'idTest'}" lay-filter="demo">
     <thead>
         <tr>
             <th lay-data="{field:'Id', width:80, sort: true, fixed: true}">ID</th>
@@ -45,7 +45,7 @@
                             layer.msg('系统管理员不能删除', { icon: 2});
                             return
                          }
-                        $.get('/EnterCustom/DelProduct?id=' + data.Id, function (res) {
+                        $.get('/Products/DelProduct?id=' + data.Id, function (res) {
                             if (res.code == 1) {
                                 obj.del(); //删除对应行（tr）的DOM结构
                                 layer.close(index);
@@ -57,7 +57,7 @@
                         //向服务端发送删除指令
                     });
                 } else if (layEvent === 'edity') {
-                    window.location = '/EnterCustom/AddProduct?id=' + data.id;
+                    window.location = '/Products/AddProduct?id=' + data.id;
                  }
             });
         });

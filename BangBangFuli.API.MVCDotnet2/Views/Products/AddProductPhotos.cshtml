@@ -27,7 +27,7 @@
     </div>
 </div>
 
-<form class="layui-form" method="post" id="addform" action="/EnterCustom/SavePhotos">
+<form class="layui-form" method="post" id="addform" action="/Products/SavePhotos">
     <input type="hidden" name="ID" value="@(Model!=null ? Model.Id:0)" id="ID" />
     <div class="layui-form-item">
         <div class="layui-input-block">
@@ -52,7 +52,7 @@
                 $(form).ajaxSubmit(function (res) {
                     if (res.code == 1) {
                         layer.msg('保存成功', { icon: 6 });
-                        window.location = '/EnterCustom/AddProductDescription?ProductId=' + res.id
+                        window.location = '/Products/AddProductDescription?ProductId=' + res.id
                     } else {
                         layer.msg('保存失败', { icon: 5 });
                     }
@@ -68,7 +68,7 @@
             var demoListView = $('#demoList')
                 , uploadListIns = upload.render({
                     elem: '#testList'
-                    , url: '/EnterCustom/Uploadattachment?ProductId=@Model.Id'
+                    , url: '/Products/Uploadattachment?ProductId=@Model.Id'
                     , accept: 'file'
                     , multiple: true
                     , auto: false

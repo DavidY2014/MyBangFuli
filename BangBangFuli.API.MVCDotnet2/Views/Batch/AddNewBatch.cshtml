@@ -8,7 +8,7 @@
     添加批次信息
 </blockquote>
 <div class="manage-form-container">
-    <form class="layui-form" method="post" id="addform" action="/EnterCustom/SaveBatch">
+    <form class="layui-form" method="post" id="addform" action="/Batch/SaveBatch">
         <div class="layui-form-item">
             <label class="layui-form-label">批次名称</label>
             <div class="layui-input-block">
@@ -48,7 +48,7 @@
                 $(form).ajaxSubmit(function (res) {
                     if (res.code == 1) {
                         layer.msg('保存成功', { icon: 6 });
-                        window.location = '/EnterCustom/QueryBatchList';
+                        window.location = '/Batch/QueryBatchList';
                     }
                     else {
                         layer.msg('保存失败', { icon: 5 });

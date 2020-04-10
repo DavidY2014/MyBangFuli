@@ -4,7 +4,7 @@
     Layout = "~/BasePages/_Layout.cshtml";
 }
 <blockquote class="layui-elem-quote">
-    <a class="layui-btn layui-btn-normal" href="/EnterCustom/AddNewBanner">添加Banner</a>
+    <a class="layui-btn layui-btn-normal" href="/Banner/AddNewBanner">添加Banner</a>
 </blockquote>
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
     <legend>Banner信息综合查询</legend>
@@ -48,7 +48,7 @@
                             @Html.DisplayFor(modelItem => item.CreateTime)
                         </td>
                         <td>
-                            <a href="/EnterCustom/AddNewBanner?id=@(item.BannerId)" class="layui-btn layui-btn-small">编辑</a>
+                            <a href="/Banner/AddNewBanner?id=@(item.BannerId)" class="layui-btn layui-btn-small">编辑</a>
                             <a href="javascript:;" class="layui-btn layui-btn-danger layui-btn-small" onclick="del('@(item.BannerId)')">删除</a>
                         </td>
                     </tr>
@@ -67,10 +67,10 @@
             layer = layui.layer
             del = function (id) {
                 layer.confirm('是否删除？', { icon: 3, title: '删除提示' }, function (index) {
-                    $.get('/EnterCustom/DelBanner?id=' + id, function (res) {
+                    $.get('/Banner/DelBanner?id=' + id, function (res) {
                         if (res.code == 1) {
                             layer.msg('成功', { icon: 6 });
-                            window.location = '/EnterCustom/QueryBannerList'
+                            window.location = '/Banner/QueryBannerList'
                         } else {
                             layer.msg('失败', { icon: 5 });
                         }

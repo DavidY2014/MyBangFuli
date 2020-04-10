@@ -322,6 +322,10 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
                 if (ret)
                 {
                     var coupon = _couponService.GetCouponByCode(couponInputDto.Code);
+                    //判断此券是不是此批次号
+                    if (coupon.BatchId != couponInputDto.BatchId) {
+                        return new ResponseOutput(null, "-1", $"此券不属于批次号{ couponInputDto.BatchId}", HttpContext.TraceIdentifier);
+                    }
                     dto = new CouponDto
                     {
                         Code = coupon.Code,

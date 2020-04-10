@@ -9,7 +9,7 @@
     添加商品信息
 </blockquote>
 <div class="manage-form-container">
-    <form class="layui-form" method="post" id="addbannerform" action="/EnterCustom/SaveBanner">
+    <form class="layui-form" method="post" id="addbannerform" action="/Banner/SaveBanner">
         <div class="layui-form-item">
             <label class="layui-form-label">批次</label>
             <div class="layui-input-block">
@@ -50,7 +50,7 @@
             var form = layui.form
             form.on('submit(demo1)', function (data) {
                 $.ajax({
-                    url: '../EnterCustom/CreateBannerSave',
+                    url: '../Banner/CreateBannerSave',
                     data: data.field,
                     success: function (data) {
                         layer.msg("提交成功")
@@ -72,7 +72,7 @@
                 $(form).ajaxSubmit(function (res) {
                     if (res.code == 1) {
                         layer.msg('保存成功', { icon: 6 });
-                        window.location = '/EnterCustom/AddBannerPhotos?BannerId=' + res.id
+                        window.location = '/Banner/AddBannerPhotos?BannerId=' + res.id
                     } else {
                         layer.msg('保存失败', { icon: 5 });
                     }

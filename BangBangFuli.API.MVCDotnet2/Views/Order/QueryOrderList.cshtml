@@ -1,13 +1,10 @@
-﻿@model List<BatchViewModel>
+﻿@model List<OrderViewModel>
 @{
-    ViewData["Title"] = "批次管理";
+    ViewData["Title"] = "订单管理";
     Layout = "~/BasePages/_Layout.cshtml";
 }
-<blockquote class="layui-elem-quote">
-    <a class="layui-btn layui-btn-normal" href="/EnterCustom/AddNewBatch">添加批次</a>
-</blockquote>
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-    <legend>批次信息综合查询</legend>
+    <legend>订单信息综合查询</legend>
 </fieldset>
 <div class="layui-fluid">
     <div class="layui-row" id="content_table">
@@ -15,20 +12,27 @@
             <thead>
                 <tr>
                     <th>
-                        ID(序号)
+                        订单号
                     </th>
                     <th>
-                        批次号
+                        券码
                     </th>
                     <th>
-                        批次名称
+                        联系人
                     </th>
                     <th>
-                        创建时间
+                        手机号码
                     </th>
                     <th>
-                        操作
+                        地址
                     </th>
+                    <th>
+                        邮编
+                    </th>
+                    <th>
+                        座机
+                    </th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -36,20 +40,28 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Id)
+                            @Html.DisplayFor(modelItem => item.OrderCode)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.BatchId)
+                            @Html.DisplayFor(modelItem => item.CouponCode)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Name)
+                            @Html.DisplayFor(modelItem => item.Contactor)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.CreateTime)
+                            @Html.DisplayFor(modelItem => item.MobilePhone)
                         </td>
                         <td>
-                            <a href="/EnterCustom/AddNewBatch?id=@(item.Id)" class="layui-btn layui-btn-small">编辑</a>
-                            <a href="javascript:;" class="layui-btn layui-btn-danger layui-btn-small" onclick="del('@(item.Id)')">删除</a>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ZipCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Telephone)
+                        </td>
+                        <td>
+                            <a href="javascript:;" class="layui-btn layui-btn-danger layui-btn-small" onclick="del('@(item.OrderId)')">删除</a>
                         </td>
                     </tr>
                 }
@@ -59,6 +71,7 @@
     </div>
 </div>
 
+
 @section Scripts{
     <script type="text/javascript">
         var layer, form
@@ -67,10 +80,10 @@
             layer = layui.layer
             del = function (id) {
                 layer.confirm('是否删除？', { icon: 3, title: '删除提示' }, function (index) {
-                    $.get('/EnterCustom/DelBatch?id=' + id, function (res) {
+                    $.get('/Order/DelOrder?id=' + id, function (res) {
                         if (res.code == 1) {
                             layer.msg('成功', { icon: 6 });
-                            window.location = '/EnterCustom/QueryBatchList'
+                            window.location = '/Order/QueryOrderList'
                         } else {
                             layer.msg('失败', { icon: 5 });
                         }
