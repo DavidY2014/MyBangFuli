@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -7,8 +8,9 @@ namespace BangBangFuli.Common
 {
     public class TextParse
     {
-        public static string[] GetHtmlImageUrlList(string sHtmlText)
+        public static string ProcessHtmlImageUrlList(string sHtmlText)
         {
+            string processHtmlText= sHtmlText;
             // 定义正则表达式用来匹配 img 标签 
             Regex regImg = new Regex(@"<img\b[^<>]*?\bsrc[\s\t\r\n]*=[\s\t\r\n]*[""']?[\s\t\r\n]*(?<imgUrl>[^\s\t\r\n""'<>]*)[^<>]*?/?[\s\t\r\n]*>", RegexOptions.IgnoreCase);
 
@@ -21,11 +23,11 @@ namespace BangBangFuli.Common
             foreach (Match match in matches)
                 sUrlList[i++] = match.Groups["imgUrl"].Value;
 
+            foreach (var url in sUrlList) {
+                processHtmlText = processHtmlText.Replace(url, "http://106.54.112.131:5001" + url);
+            }
 
-
-
-
-            return sUrlList;
+            return processHtmlText;
         }
 
     }

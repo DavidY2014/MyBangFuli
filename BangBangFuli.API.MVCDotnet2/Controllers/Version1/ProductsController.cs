@@ -233,9 +233,6 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers.Version1
         {
             var productInfo = _productInformationService.GetProductById(ProductId);
             productInfo.Description = Request.Form["Rem"].TryToString();
-            string[] srcinfos =  TextParse.GetHtmlImageUrlList(productInfo.Description);
-
-
             _productInformationService.UpdateProduct(productInfo);
             return Json(new { code = 1, msg = "OK" });
         }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BangBangFuli.API.MVCDotnet2.Controllers.Dtos;
 using BangBangFuli.API.MVCDotnet2.Extensions;
+using BangBangFuli.Common;
 using BangBangFuli.H5.API.Application.Services.BasicDatas;
 using BangBangFuli.H5.API.Core;
 using BangBangFuli.H5.API.Core.Entities;
@@ -186,17 +187,20 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
                         }
                     }
 
-                    productDtos.Add(new ProductDto
-                    {
-                        Id = product.Id,
-                        Code = product.ProductCode,
-                        Name = product.ProductName,
-                        Description = product.Description,
-                        StockStatus = (int)product.StockType,
-                        ClassType = (int)product.Type,
-                        ProductStatus = (int)product.ProductStatus,
-                        Photos = detailDtos.Select(item => Path.Combine("http://106.54.112.131:5001/",item.PhotoPath.Replace('\\','/'))).ToList()
-                    });
+                    var productDto = new ProductDto();
+                    productDto.Id = product.Id;
+                    productDto.Code = product.ProductCode;
+                    productDto.Name = product.ProductName;
+                    if (!string.IsNullOrEmpty(product.Description)) {
+                        //修改富文本的图片为绝对路径
+                        string processDescription = TextParse.ProcessHtmlImageUrlList(product.Description);
+                        productDto.Description = processDescription;
+                    }
+                    productDto.StockStatus = (int)product.StockType;
+                    productDto.ClassType = (int)product.Type;
+                    productDto.ProductStatus = (int)product.ProductStatus;
+                    productDto.Photos = detailDtos.Select(item => Path.Combine("http://106.54.112.131:5001/", item.PhotoPath.Replace('\\', '/'))).ToList();
+                    productDtos.Add(productDto);
                 }
                 return new ResponseOutput(productDtos, "0", string.Empty, HttpContext.TraceIdentifier);
             }
