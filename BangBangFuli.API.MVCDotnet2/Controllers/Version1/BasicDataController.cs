@@ -65,7 +65,13 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
                     var bannerDetails = item.BannerDetails;
                     if (bannerDetails != null)
                     {
-                        photoUniqueNames.AddRange(bannerDetails.Select(s => Path.Combine("http://106.54.112.131:5001/", s.PhotoPath.Replace('\\', '/'))).ToList());
+                        var bannerPhotos = new List<string>();
+                        foreach (var detail in bannerDetails) {
+                            var rawPhoto = Path.Combine("http://106.54.112.131:5001/banners", detail.PhotoPath);
+                            var processPhoto = rawPhoto.Replace('\\', '/');
+                            bannerPhotos.Add(processPhoto);
+                        }
+                        photoUniqueNames.AddRange(bannerPhotos);
                     }
                 }
                 return new ResponseOutput(photoUniqueNames, "0", string.Empty, HttpContext.TraceIdentifier);
