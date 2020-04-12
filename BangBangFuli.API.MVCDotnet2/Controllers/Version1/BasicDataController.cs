@@ -240,16 +240,20 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
                     }
                 }
 
-                ProductDto dto = new ProductDto
+                ProductDto dto = new ProductDto();
+                dto.Code = product.ProductCode;
+                dto.Name = product.ProductName;
+                if (!string.IsNullOrEmpty(product.Description))
                 {
-                    Code = product.ProductCode,
-                    Name = product.ProductName,
-                    Description = product.Description,
-                    ClassType = (int)product.Type,
-                    StockStatus = (int)product.StockType,
-                    ProductStatus = (int)product.ProductStatus,
-                    Photos = detailDtos.Select(item => Path.Combine("http://106.54.112.131:5001/",item.PhotoPath.Replace('\\','/'))).ToList()
-                };
+                    //修改富文本的图片为绝对路径
+                    string processDescription = TextParse.ProcessHtmlImageUrlList(product.Description);
+                    dto.Description = processDescription;
+                }
+                dto.ClassType = (int)product.Type;
+                dto.StockStatus = (int)product.StockType;
+                dto.ProductStatus = (int)product.ProductStatus;
+                dto.Photos = detailDtos.Select(item => Path.Combine("http://106.54.112.131:5001/", item.PhotoPath.Replace('\\', '/'))).ToList();
+                
                 return new ResponseOutput(dto, "0", string.Empty, HttpContext.TraceIdentifier);
             }
             catch (Exception ex)

@@ -27,7 +27,7 @@
     </div>
 </div>
 
-<form class="layui-form" method="post" id="addform" action="/Banner/SavePhotos">
+<form class="layui-form" method="post" id="addform" action="/banners/SavePhotos">
     <input type="hidden" name="ID" value="@(Model!=null ? Model.Id:0)" id="ID" />
     <div class="layui-form-item">
         <div class="layui-input-block">
@@ -57,7 +57,7 @@
                     } else {
                         layer.msg('保存失败', { icon: 5 });
                     }
-                    window.location = '/Banner/BannerList';
+                    window.location = '/banners/BannerList';
                 })
             }
         })
@@ -71,7 +71,7 @@
             var demoListView = $('#demoList')
                 , uploadListIns = upload.render({
                     elem: '#testList'
-                    , url: '/Banner/UploadBannerAttachment?BannerId=@Model.Id'
+                    , url: '/banners/UploadBannerAttachment?BannerId=@Model.Id'
                     , accept: 'file'
                     , multiple: true
                     , auto: false

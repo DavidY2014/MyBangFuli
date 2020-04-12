@@ -21,5 +21,7 @@ namespace BangBangFuli.API.MVCDotnet2.Models
 
         public int TotalCount { get; set; }
 
+        public int BatchId { get; set; }
+
     }
 }

@@ -4,9 +4,9 @@
 }
 <blockquote class="layui-elem-quote">
     头图管理中展示了所有的头图信息，可以进行删除添加等操作
-    <a class="layui-btn layui-btn-normal" href="/Banner/AddNewBanner">添加头图</a>
+    <a class="layui-btn layui-btn-normal" href="/banners/AddNewBanner">添加头图</a>
 </blockquote>
-<table class="layui-table" lay-data="{height:600, url:'/Banner/BannerListData', page:true, id:'idTest'}" lay-filter="demo">
+<table class="layui-table" lay-data="{height:600, url:'/banners/BannerListData', page:true, id:'idTest'}" lay-filter="demo">
     <thead>
         <tr>
             <th lay-data="{field:'BannerId', width:80, sort: true, fixed: true}">ID</th>
@@ -41,7 +41,7 @@
                             layer.msg('系统管理员不能删除', { icon: 2});
                             return
                          }
-                        $.get('/Banner/DelBanner?id=' + data.BannerId, function (res) {
+                        $.get('/banners/DelBanner?id=' + data.BannerId, function (res) {
                             if (res.code == 1) {
                                 obj.del(); //删除对应行（tr）的DOM结构
                                 layer.close(index);
@@ -53,8 +53,7 @@
                         //向服务端发送删除指令
                     });
                 } else if (layEvent === 'edity') {
-                    //window.location = '/Banner/AddProduct?id=' + data.id;
-                    window.location = '/Banner/AddBanner?id=' + data.id;
+                    window.location = '/banners/EditBanner?id=' + data.BannerId;
                  }
             });
         });

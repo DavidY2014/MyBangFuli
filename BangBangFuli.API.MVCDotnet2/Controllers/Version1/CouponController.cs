@@ -53,8 +53,9 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers.Version1
                         Password = batch.Password,
                         ValidityDate = batch.ValidityDate,
                         AvaliableCount = batch.AvaliableCount,
-                        TotalCount = batch.TotalCount
-                    });
+                        TotalCount = batch.TotalCount,
+                        BatchId = batch.BatchId
+                    }); 
                 }
             }
             return Json(new { code = 0, msg = "", count = couponInfos.Item2, data = couponList.ToArray() });

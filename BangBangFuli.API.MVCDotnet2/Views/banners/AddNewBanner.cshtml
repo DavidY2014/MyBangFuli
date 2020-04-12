@@ -6,12 +6,12 @@
     List<BatchInformation> BatchInfoList = ViewBag.BatchInfos;
 }
 <blockquote class="layui-elem-quote">
-    添加商品信息
+    添加BANNER
 </blockquote>
 <div class="manage-form-container">
-    <form class="layui-form" method="post" id="addbannerform" action="/Banner/SaveBanner">
+    <form class="layui-form" method="post" id="addbannerform" action="/banners/SaveBanner">
         <div class="layui-form-item">
-            <label class="layui-form-label">批次</label>
+            <label class="layui-form-label">未使用的批次号</label>
             <div class="layui-input-block">
                 <select class="layui-form-select" name="BatchId" lay-filter="BatchId" lay-search>
                     <option value=""></option>
@@ -19,7 +19,7 @@
                     {
                         foreach (var info in BatchInfoList)
                         {
-                            <option value="@info.Id" data-id="@info.Id">@info.Name</option>
+                            <option value="@info.Id" data-id="@info.Id">批次名称:@info.Name----批次号为:@info.Id</option>
                         }
                     }
                 </select>
@@ -34,7 +34,7 @@
         <input type="hidden" name="ID" value="@(Model!=null ? Model.Id:0)" id="ID" />
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">保存</button>
+                <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">选择上传图片</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
@@ -50,7 +50,7 @@
             var form = layui.form
             form.on('submit(demo1)', function (data) {
                 $.ajax({
-                    url: '../Banner/CreateBannerSave',
+                    url: '../banners/CreateBannerSave',
                     data: data.field,
                     success: function (data) {
                         layer.msg("提交成功")
@@ -72,7 +72,7 @@
                 $(form).ajaxSubmit(function (res) {
                     if (res.code == 1) {
                         layer.msg('保存成功', { icon: 6 });
-                        window.location = '/Banner/AddBannerPhotos?BannerId=' + res.id
+                        window.location = '/banners/AddBannerPhotos?BannerId=' + res.id
                     } else {
                         layer.msg('保存失败', { icon: 5 });
                     }

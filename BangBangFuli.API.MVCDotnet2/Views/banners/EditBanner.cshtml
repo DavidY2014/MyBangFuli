@@ -1,0 +1,31 @@
+﻿@using BangBangFuli.H5.API.Core.Entities
+@model List<BannerDetail>
+@{
+    ViewData["Title"] = "编辑头图 ";
+    Layout = "~/BasePages/_Layout.cshtml";
+}
+
+<div class="layui-col-md2 layui-col-sm4">
+    <div class="cmdlist-container">
+
+        @if (Model != null && Model.Count > 0)
+        {
+            foreach (var info in Model)
+            {
+                 <img src="@info.PhotoPath">
+            }
+        }
+
+
+    </div>
+</div>
+
+
+
+
+@section Scripts{
+    <script type="text/javascript">
+
+
+    </script>
+}

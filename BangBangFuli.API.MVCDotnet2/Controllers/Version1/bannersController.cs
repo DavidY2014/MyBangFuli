@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BangBangFuli.API.MVCDotnet2.Controllers.Version1
 {
     [UserLoginFilter]
-    public class BannerController : BaseController
+    public class bannersController : BaseController
     {
         private IUserRoleJurisdictionService _userRoleJurisdictionService;
         private IModuleInfoService _moduleInfoService;
@@ -25,7 +25,7 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers.Version1
         private readonly IBannerDetailService _bannerDetailService;
         private readonly IHostingEnvironment _hostingEnvironment;
 
-        public BannerController(IUserRoleJurisdictionService userRoleJurisdictionService, IModuleInfoService moduleInfoService,IBannerService bannerService, 
+        public bannersController(IUserRoleJurisdictionService userRoleJurisdictionService, IModuleInfoService moduleInfoService,IBannerService bannerService, 
             IBannerDetailService bannerDetailService,
             IBatchInformationService batchInformationService,
             IHostingEnvironment hostingEnvironment):base(userRoleJurisdictionService, moduleInfoService)
@@ -72,6 +72,17 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers.Version1
 
 
         /// <summary>
+        /// 编辑视图
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public IActionResult EditBanner(int id) {
+
+            var details = _bannerDetailService.GetDetailsByBannerId(id);
+            return View(details);
+        }
+
+        /// <summary>
         /// 新建banner视图
         /// </summary>
         /// <returns></returns>
@@ -83,8 +94,11 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers.Version1
                 bannerInfo = _bannerService.GetBannerById(id);
             }
             List<BatchInformation> batchInfos = _batchInformationService.GetAll();
-            ViewBag.BatchInfos = batchInfos;
-            //ViewBag.SelectedBatchInfo = _batchInformationService.GetBatchInfoById(bannerInfo.BatchId);
+            //过滤，只有没有头图的批次才可以显示出来
+            var usedBatchIds = _bannerService.GetAll().Select(item => item.BatchId).Distinct().ToList(); //已经用过的批次号
+            var usedBatchInfos = batchInfos.Where(item => usedBatchIds.Contains(item.Id)).ToList();
+            var UnUsedBatchInfos = batchInfos.Except(usedBatchInfos).ToList();
+            ViewBag.BatchInfos = UnUsedBatchInfos;
             return View(bannerInfo);
         }
 
@@ -184,8 +198,9 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers.Version1
                 details.Add(new BannerDetail()
                 {
                     BannerId = bannerInfo.Id,
-                    PhotoPath = Path.Combine("banners", uniqueFileName)
-                });
+                    //PhotoPath = Path.Combine("banners", uniqueFileName) //旧版本
+                    PhotoPath = uniqueFileName
+                }) ;
                 bannerInfo.BannerDetails = details;
                 _bannerService.UpdateBanner(bannerInfo);
 
