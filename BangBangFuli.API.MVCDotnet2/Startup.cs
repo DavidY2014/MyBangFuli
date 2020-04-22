@@ -42,7 +42,22 @@ namespace BangBangFuli.API.MVCDotnet2
             {
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "bangbangfuli",
+                    Title = @"ClassType:商品大类       
+                        yuexiangmeiwei=0, 悦享美味
+                        jujiahaowu=1,  居家好物
+                        pingzhishenghuo=2, 品质生活
+                        chufangzhengxuan=3,  厨房甑选
+                        unknown=4 ,未知类别
+                        /// -----------------------
+                         StockStatus:库存状态
+                         No=0,  没有货
+                         Yes=1,  有货
+                         Unknown=2，未知状态
+                        /// -----------------------
+                         ProductStatus:商品状态
+                         Down=0, 未上架
+                         On=1, 上架
+                         Unknown=2，未知状态 ",
                     Version = "v1"
                 }
                 );

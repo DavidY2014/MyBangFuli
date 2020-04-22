@@ -174,8 +174,13 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
                 foreach (var product in products)
                 {
                     //过滤商品状态
-                    if (product.ProductStatus == ProductStatusTypeEnum.Down || product.ProductStatus == ProductStatusTypeEnum.Unknown
-                        || product.StockType == StockStatusTypeEnum.No || product.StockType == StockStatusTypeEnum.Unknown)
+                    //if (product.ProductStatus == ProductStatusTypeEnum.Down || product.ProductStatus == ProductStatusTypeEnum.Unknown
+                    //    || product.StockType == StockStatusTypeEnum.No || product.StockType == StockStatusTypeEnum.Unknown)
+                    //{
+                    //    continue;
+                    //}
+                    //过滤库存状态
+                    if (product.ProductStatus == ProductStatusTypeEnum.Down || product.ProductStatus == ProductStatusTypeEnum.Unknown)
                     {
                         continue;
                     }

@@ -6,6 +6,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>E:\bangbang\Publish\BangbangfuliMVC</_PublishTargetUrl>
+    <_PublishTargetUrl>E:\bangbang\Publish\IndepentPublish</_PublishTargetUrl>
   </PropertyGroup>
 </Project>

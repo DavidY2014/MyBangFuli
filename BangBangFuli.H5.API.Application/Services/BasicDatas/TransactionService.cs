@@ -24,29 +24,39 @@ namespace BangBangFuli.H5.API.Application.Services.BasicDatas
 
         public bool CreateNewOrderTransaction(Order order, Coupon coupon)
         {
-            var ret = true;
+            int productNum = 0;
+            //获取订单商品数量
+            foreach (var item in order.Details)
+            {
+                productNum += item.ProductCount;
+            }
+            var ret = false;
             _unitOfWork.BeginTransaction();
             try
             {
                 #region 事务处理
-              
+
                 _orderRepository.CreateNewOrder(order);
-                coupon.AvaliableCount--;
-                _couponRepository.UpdateCoupon(coupon);
+                if (coupon.AvaliableCount < productNum) {
+                    throw new Exception("可用券数量不够");
+                }
+                coupon.AvaliableCount -= productNum;
                 //更新券的信息
                 _unitOfWork.SaveChanges();
                 _unitOfWork.CommitTransaction();
                 #endregion
-
+                ret = true;
                 return ret;
             }
             catch (Exception ex)
             {
+
                 ret = false;
                 _unitOfWork.RollBackTransaction();
-                return ret;
-            }
+                throw ex;
 
+            }
+     
         }
 
     }

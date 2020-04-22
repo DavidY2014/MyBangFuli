@@ -116,38 +116,46 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers.Version1
         [HttpPost]
         public IActionResult SaveProduct()
         {
-            int id = Request.Form["ID"].TryToInt(0);
-            if (id > 0)
+            try
             {
-                var info = _productInformationService.GetProductById(id);
-                info.ProductCode = Request.Form["ProductCode"].TryToString();
-                info.ProductName = Request.Form["ProductName"].TryToString();
-                info.BatchId = Request.Form["BatchId"].TryToInt(0);
-                info.Type = (ClassTypeEnum)Request.Form["ClassType"].TryToInt(0);
-                info.ProductStatus = (ProductStatusTypeEnum)Request.Form["ProductStatusType"].TryToInt(0);
-                info.StockType = (StockStatusTypeEnum)Request.Form["StockStatusType"].TryToInt(0);
-                _productInformationService.UpdateProduct(info);
-                return Json(new { code = 1, msg = "OK", id = info.Id });
-            }
-            else
-            {
-                ProductInformation productInfo = new ProductInformation();
-                productInfo.ProductCode = Request.Form["ProductCode"].TryToString();
-                productInfo.ProductName = Request.Form["ProductName"].TryToString();
-                productInfo.BatchId = Request.Form["BatchId"].TryToInt(0);
-                productInfo.Type = (ClassTypeEnum)Request.Form["ClassType"].TryToInt(0);
-                productInfo.ProductStatus = (ProductStatusTypeEnum)Request.Form["ProductStatusType"].TryToInt(0);
-                productInfo.StockType = (StockStatusTypeEnum)Request.Form["StockStatusType"].TryToInt(0);
-                id = _productInformationService.AddProduct(productInfo);
+                int id = Request.Form["Id"].TryToInt(0);
                 if (id > 0)
                 {
-                    return Json(new { code = 1, msg = "OK", id = id });
+                    var info = _productInformationService.GetProductById(id);
+                    info.ProductCode = Request.Form["ProductCode"].TryToString();
+                    info.ProductName = Request.Form["ProductName"].TryToString();
+                    info.BatchId = Request.Form["BatchId"].TryToInt(0);
+                    info.Type = (ClassTypeEnum)Request.Form["ClassType"].TryToInt(0);
+                    info.ProductStatus = (ProductStatusTypeEnum)Request.Form["ProductStatusType"].TryToInt(0);
+                    info.StockType = (StockStatusTypeEnum)Request.Form["StockStatusType"].TryToInt(0);
+                    _productInformationService.UpdateProduct(info);
+                    return Json(new { code = 1, msg = "OK", id = info.Id });
                 }
                 else
                 {
-                    return Json(new { code = 0, msg = "保存失败" });
+                    ProductInformation productInfo = new ProductInformation();
+                    productInfo.ProductCode = Request.Form["ProductCode"].TryToString();
+                    productInfo.ProductName = Request.Form["ProductName"].TryToString();
+                    productInfo.BatchId = Request.Form["BatchId"].TryToInt(0);
+                    productInfo.Type = (ClassTypeEnum)Request.Form["ClassType"].TryToInt(0);
+                    productInfo.ProductStatus = (ProductStatusTypeEnum)Request.Form["ProductStatusType"].TryToInt(0);
+                    productInfo.StockType = (StockStatusTypeEnum)Request.Form["StockStatusType"].TryToInt(0);
+                    id = _productInformationService.AddProduct(productInfo);
+                    if (id > 0)
+                    {
+                        return Json(new { code = 1, msg = "OK", id = id });
+                    }
+                    else
+                    {
+                        return Json(new { code = 0, msg = "保存失败" });
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                return Json(new { code = 0, msg = ex.Message });
+            }
+           
         }
 
         /// <summary>
