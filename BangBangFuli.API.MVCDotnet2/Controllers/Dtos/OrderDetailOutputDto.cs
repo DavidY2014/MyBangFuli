@@ -13,5 +13,7 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers.Dtos
         public string ProductName { get; set; }
 
         public int ProductCount { get; set; }
+
+        public string ProductImageUrl { get; set; }
     }
 }

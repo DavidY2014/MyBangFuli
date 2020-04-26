@@ -35,3 +35,8 @@
 /BangBangFuli.Models
 /test/obj
 /test/wwwroot
+/WebApplication1/obj
+/WebApplication1/wwwroot
+/WebApplication1/appsettings.json
+/WebApplication1/appsettings.Development.json
+/WebApplication1
