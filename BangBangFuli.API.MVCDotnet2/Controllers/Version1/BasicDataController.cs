@@ -263,7 +263,7 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
                 dto.ClassType = (int)product.Type;
                 dto.StockStatus = (int)product.StockType;
                 dto.ProductStatus = (int)product.ProductStatus;
-                dto.Photos = detailDtos.Select(item => Path.Combine("http://www.bangbangfuli.cn/", item.PhotoPath.Replace('\\', '/'))).ToList();
+                dto.Photos = detailDtos.Select(item => Path.Combine("http://www.bangbangfuli.cn:5001/", item.PhotoPath.Replace('\\', '/'))).ToList();
                 
                 return new ResponseOutput(dto, "0", string.Empty, HttpContext.TraceIdentifier);
             }

@@ -24,7 +24,7 @@ namespace BangBangFuli.Common
                 sUrlList[i++] = match.Groups["imgUrl"].Value;
 
             foreach (var url in sUrlList) {
-                processHtmlText = processHtmlText.Replace(url, "http://106.54.112.131:5001" + url);
+                processHtmlText = processHtmlText.Replace(url, "http://www.bangbangfuli.cn:5001" + url);
             }
 
             return processHtmlText;
