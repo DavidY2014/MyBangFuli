@@ -405,6 +405,13 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
                 {
                     return new ResponseOutput(null, "-1", "券号不对", HttpContext.TraceIdentifier);
                 }
+                if (!string.IsNullOrWhiteSpace(inputDto.CouponCode) || !string.IsNullOrWhiteSpace(inputDto.Contactor)
+                    || !string.IsNullOrWhiteSpace(inputDto.MobilePhone) || !string.IsNullOrWhiteSpace(inputDto.Province)
+                    || !string.IsNullOrWhiteSpace(inputDto.City) || !string.IsNullOrWhiteSpace(inputDto.District)
+                    || !string.IsNullOrWhiteSpace(inputDto.Address))
+                {
+                    return new ResponseOutput(null, "-1", "必填字段缺失", HttpContext.TraceIdentifier);
+                }
 
                 var coupon = _couponService.GetCouponByCode(inputDto.CouponCode);
                 if (coupon == null)
@@ -416,6 +423,9 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
                 {
                     return new ResponseOutput(null, "-1", "此券次数已用完,不能下单", HttpContext.TraceIdentifier);
                 }
+
+         
+
 
                 List<OrderDetail> details = new List<OrderDetail>();
 
