@@ -40,3 +40,5 @@
 /WebApplication1/appsettings.json
 /WebApplication1/appsettings.Development.json
 /WebApplication1
+/BangBangFuli.MQ.Consumer/obj
+/BangBangFuli.MQ.Consumer/bin/Debug/netcoreapp3.1

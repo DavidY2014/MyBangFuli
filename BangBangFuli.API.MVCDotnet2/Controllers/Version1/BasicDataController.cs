@@ -252,6 +252,7 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
                 }
 
                 ProductDto dto = new ProductDto();
+                dto.Id = product.Id;
                 dto.Code = product.ProductCode;
                 dto.Name = product.ProductName;
                 if (!string.IsNullOrEmpty(product.Description))
@@ -405,10 +406,10 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
                 {
                     return new ResponseOutput(null, "-1", "券号不对", HttpContext.TraceIdentifier);
                 }
-                if (!string.IsNullOrWhiteSpace(inputDto.CouponCode) || !string.IsNullOrWhiteSpace(inputDto.Contactor)
-                    || !string.IsNullOrWhiteSpace(inputDto.MobilePhone) || !string.IsNullOrWhiteSpace(inputDto.Province)
-                    || !string.IsNullOrWhiteSpace(inputDto.City) || !string.IsNullOrWhiteSpace(inputDto.District)
-                    || !string.IsNullOrWhiteSpace(inputDto.Address))
+                if (string.IsNullOrWhiteSpace(inputDto.CouponCode) || string.IsNullOrWhiteSpace(inputDto.Contactor)
+                    || string.IsNullOrWhiteSpace(inputDto.MobilePhone) || string.IsNullOrWhiteSpace(inputDto.Province)
+                    || string.IsNullOrWhiteSpace(inputDto.City) || string.IsNullOrWhiteSpace(inputDto.District)
+                    || string.IsNullOrWhiteSpace(inputDto.Address))
                 {
                     return new ResponseOutput(null, "-1", "必填字段缺失", HttpContext.TraceIdentifier);
                 }
@@ -424,15 +425,21 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
                     return new ResponseOutput(null, "-1", "此券次数已用完,不能下单", HttpContext.TraceIdentifier);
                 }
 
-         
-
 
                 List<OrderDetail> details = new List<OrderDetail>();
+
+                if (inputDto.DetailDtos ==null && inputDto.DetailDtos.Count == 0)
+                {
+                    return new ResponseOutput(null, "-1", "商品明细为空", HttpContext.TraceIdentifier);
+                }
 
                 foreach (var item in inputDto.DetailDtos)
                 {
                     ProductInformation productInfo = _productService.GetProductById(item.ProductId);
-
+                    if (productInfo == null)
+                    {
+                        return new ResponseOutput(null, "-1","商品明细为空", HttpContext.TraceIdentifier);
+                    }
                     details.Add(new OrderDetail
                     {
                         ProductId = item.ProductId,
@@ -441,7 +448,6 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
                         ProductCount = item.Count,
                     });
                 }
-
 
                 long currentTicks = DateTime.Now.Ticks;
                 DateTime dtFrom = new DateTime(1970, 1, 1, 0, 0, 0, 0);
@@ -468,7 +474,9 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
 
                 #endregion
 
-                //发送手机短信给用户，当然这个可以用job实现
+                //发送手机短信给用户，用消息队列或者单独开个进程试一下
+
+
                 if (ret)
                     return new ResponseOutput(null, "0", "创建订单成功", HttpContext.TraceIdentifier);
 

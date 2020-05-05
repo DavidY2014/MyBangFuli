@@ -60,12 +60,10 @@ namespace BangBangFuli.H5.API.Core.Entities
         [Display(Name = "地址")]
         public string Address { get; set; }
 
-        [Required]
         [MaxLength(10)]
         [Display(Name = "邮编")]
         public int ZipCode { get; set; }
 
-        [Required]
         [MaxLength(10)]
         [Display(Name = "固定电话")]
         public string Telephone { get; set; }
