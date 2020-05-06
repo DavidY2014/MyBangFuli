@@ -1,15 +1,21 @@
 ﻿using System;
+using System.Threading;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BangBangFuli.MQ.Consumer
 {
     /// <summary>
-    /// mq消费者，发送短信
+    /// mq消费者，接受短信
     /// </summary>
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            ServiceCollection services = new ServiceCollection();
+            services.AddSingleton<IMqConsumer, MqConsumerHelper>();
+            var provider = services.BuildServiceProvider();
+            var consumerHelper = provider.GetService<IMqConsumer>();
+            consumerHelper.ConsumerMessage();
         }
     }
 }

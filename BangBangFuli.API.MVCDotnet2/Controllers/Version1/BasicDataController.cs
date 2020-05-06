@@ -28,12 +28,15 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
         private readonly IProductDetailService _productDetailService;
         private readonly ITransactionService _transactionService;
         private readonly IOrderService _orderService;
+        private readonly IRabbitMqProducer _mqProducer;
 
         private readonly ILogger _logger;
         public string VERFIY_CODE_TOKEN_COOKIE_NAME = "VerifyCode";
 
         public BasicDataController(ICouponService couponService, IBannerService bannerService, IProductInformationService productService, IOrderService orderService,
-            IOrderDetailService orderDetailService, IProductDetailService productDetailService, ITransactionService transactionService, ILogger<BasicDataController> logger)
+            IOrderDetailService orderDetailService, IProductDetailService productDetailService, 
+            ITransactionService transactionService, ILogger<BasicDataController> logger,
+            IRabbitMqProducer mqProducer)
         {
             _couponService = couponService;
             _bannerService = bannerService;
@@ -43,6 +46,7 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
             _productDetailService = productDetailService;
             _transactionService = transactionService;
             _logger = logger;
+            _mqProducer = mqProducer;
         }
 
 
@@ -463,8 +467,8 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
                     City = inputDto.City,
                     District = inputDto.District,
                     Address = inputDto.Address,
-                    ZipCode = int.Parse(inputDto.ZipCode),
-                    Telephone = inputDto.Telephone,
+                    ZipCode = int.Parse(inputDto.ZipCode??"0"),
+                    Telephone = inputDto.Telephone??string.Empty,
                     Details = details
                 };
 
@@ -475,7 +479,7 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
                 #endregion
 
                 //发送手机短信给用户，用消息队列或者单独开个进程试一下
-
+                _mqProducer.SendMessage(inputDto.MobilePhone);
 
                 if (ret)
                     return new ResponseOutput(null, "0", "创建订单成功", HttpContext.TraceIdentifier);

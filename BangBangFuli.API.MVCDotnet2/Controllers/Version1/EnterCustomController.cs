@@ -23,13 +23,15 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
     {
         private IUserRoleJurisdictionService _userRoleJurisdictionService;
         private IModuleInfoService _moduleInfoService;
+        private readonly IRabbitMqProducer _mqProducer;
 
         public EnterCustomController(IUserRoleJurisdictionService userRoleJurisdictionService,
-            IModuleInfoService moduleInfoService):base(userRoleJurisdictionService, moduleInfoService)
+            IModuleInfoService moduleInfoService,
+            IRabbitMqProducer mqProducer) :base(userRoleJurisdictionService, moduleInfoService)
         {
             _userRoleJurisdictionService = userRoleJurisdictionService;
             _moduleInfoService = moduleInfoService;
-
+            _mqProducer = mqProducer;
         }
 
         #region 工作台 首页
@@ -42,6 +44,16 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult SendMsg()
+        {
+            var msg = Request.Form["Msg"].TryToString();
+            _mqProducer.SendMessage(msg);
+            //return Json(new { code = 0, msg = $"发送消息到mq为:{msg}" });
+            return RedirectToAction("ConsoleIndex");
+        }
+
 
         #endregion
 

@@ -4,14 +4,16 @@ using BangBangFuli.H5.API.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BangBangFuli.H5.API.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(CouponSystemDBContext))]
-    partial class CouponSystemDBContextModelSnapshot : ModelSnapshot
+    [Migration("20200505143019_updatelength2")]
+    partial class updatelength2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -176,7 +178,7 @@ namespace BangBangFuli.H5.API.EntityFrameworkCore.Migrations
 
                     b.Property<string>("ProductCode")
                         .IsRequired()
-                        .HasMaxLength(20);
+                        .HasMaxLength(10);
 
                     b.Property<int>("ProductCount")
                         .HasMaxLength(10);
@@ -185,7 +187,7 @@ namespace BangBangFuli.H5.API.EntityFrameworkCore.Migrations
 
                     b.Property<string>("ProductName")
                         .IsRequired()
-                        .HasMaxLength(50);
+                        .HasMaxLength(20);
 
                     b.HasKey("Id");
 

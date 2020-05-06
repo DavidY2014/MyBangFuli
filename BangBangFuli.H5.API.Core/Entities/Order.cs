@@ -56,7 +56,7 @@ namespace BangBangFuli.H5.API.Core.Entities
         public string District { get; set; }
 
         [Required]
-        [MaxLength(10)]
+        [MaxLength(50)]
         [Display(Name = "地址")]
         public string Address { get; set; }
 
@@ -64,7 +64,7 @@ namespace BangBangFuli.H5.API.Core.Entities
         [Display(Name = "邮编")]
         public int ZipCode { get; set; }
 
-        [MaxLength(10)]
+        [MaxLength(20)]
         [Display(Name = "固定电话")]
         public string Telephone { get; set; }
 
