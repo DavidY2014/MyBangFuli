@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using BangBangFuli.H5.API.Core.Models;
+using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 
 namespace BangBangFuli.Common
@@ -9,16 +11,18 @@ namespace BangBangFuli.Common
 	{
 		private ConnectionFactory _factory;
 		private IConnection _connection;
-		private IModel _channel;
-		public RabbitMqProducer()
+		private IModel _channel; 
+		private readonly MqInfoSetting _MqSetting;
+		public RabbitMqProducer(IOptions<MqInfoSetting> MqSetting)
 		{
+			_MqSetting = MqSetting.Value;
 
 			//创建连接工厂
 			_factory = new ConnectionFactory
 			{
-				UserName = "guest",//用户名
-				Password = "guest",//密码
-				HostName = "127.0.0.1"//rabbitmq ip
+				UserName = _MqSetting.Username,//用户名
+				Password = _MqSetting.Password,//密码
+				HostName = _MqSetting.Hostname//rabbitmq ip
 			};
 			//创建连接
 			_connection = _factory.CreateConnection();

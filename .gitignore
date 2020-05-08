@@ -43,3 +43,6 @@
 /BangBangFuli.MQ.Consumer/obj
 /BangBangFuli.MQ.Consumer/bin/Debug/netcoreapp3.1
 /Mq.Consumer/obj
+/BangBangFuli.MQ.Consumer/bin/Release/netcoreapp3.1
+/BangBangFuli.TextMessage.Utlity/bin/Debug/netcoreapp3.1
+/BangBangFuli.TextMessage.Utlity/obj

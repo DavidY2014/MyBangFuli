@@ -5,9 +5,11 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using BangBangFuli.API.MVCDotnet2.Extensions;
+using BangBangFuli.API.MVCDotnet2.Models;
 using BangBangFuli.Common;
 using BangBangFuli.H5.API.Core;
 using BangBangFuli.H5.API.Core.Entities;
+using BangBangFuli.H5.API.Core.Models;
 using BangBangFuli.H5.API.EntityFrameworkCore;
 using BangBangFuli.Utils.ORM.Imp;
 using Microsoft.AspNetCore.Builder;
@@ -72,7 +74,9 @@ namespace BangBangFuli.API.MVCDotnet2
             services.AddScoped<IUnitOfWork, H5.API.EntityFrameworkCore.UnitOfWork<CouponSystemDBContext>>();//注入UOW依赖，确保每次请求都是同一个对象
             services.AddByAssembly("BangBangFuli.H5.API.EntityFrameworkCore", "IBaseRepository");
             services.AddByAssembly("BangBangFuli.H5.API.Application", "IAppService");
+            services.Configure<MqInfoSetting>(this.Configuration.GetSection("MqInfoSetting"));
             services.AddSingleton<IRabbitMqProducer, RabbitMqProducer>();
+
             services.AddUEditorService();
             services.AddSession();
 
