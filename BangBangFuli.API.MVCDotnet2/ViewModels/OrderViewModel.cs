@@ -31,5 +31,8 @@ namespace BangBangFuli.API.MVCDotnet2.Models
         [Display(Name = "座机号码")]
         public string Telephone { get; set; }
 
+        [Display(Name ="购买商品(数量)")]
+        public string BuyProductInfo { get; set; }
+
     }
 }

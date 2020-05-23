@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using BangBangFuli.API.MVCDotnet2.Filter;
 using BangBangFuli.API.MVCDotnet2.Models;
@@ -47,6 +48,16 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers.Version1
             {
                 foreach (var order in orderInfos.Item1)
                 {
+                    var details = _orderDetailService.GetOrderDetailByOrderId(order.Id);
+                    var builder = new StringBuilder();
+                    if (details != null && details.Count>0)
+                    {
+                        foreach (var item in details)
+                        {
+                            builder.AppendLine(item.ProductName + "(" + item.ProductCount + ")");
+                        }
+                    }
+
                     orderList.Add(new OrderViewModel
                     {
                         Id = order.Id,
@@ -56,8 +67,9 @@ namespace BangBangFuli.API.MVCDotnet2.Controllers.Version1
                         MobilePhone = order.MobilePhone,
                         Address = order.Address,
                         ZipCode = order.ZipCode,
-                        Telephone = order.Telephone
-                    });
+                        Telephone = order.Telephone,
+                        BuyProductInfo = builder.ToString()
+                    }) ;
                 }
             }
             return Json(new { code = 0, msg = "", count = orderInfos.Item2, data = orderList.ToArray() });

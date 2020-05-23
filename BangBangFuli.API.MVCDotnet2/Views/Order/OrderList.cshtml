@@ -17,19 +17,21 @@
             <th lay-data="{field:'Address', width:180}">地址</th>
             <th lay-data="{field:'ZipCode', width:180}">邮编</th>
             <th lay-data="{field:'Telephone', width:180}">座机</th>
+            <th lay-data="{field:'BuyProductInfo', width:180}">购买的商品</th>
             <th lay-data="{fixed: 'right', width:200, align:'center', toolbar: '#barDemo'}"></th>
         </tr>
     </thead>
 </table>
 <script type="text/html" id="barDemo">
     <div class="layui-btn-group">
-        <a class="layui-btn layui-btn-mini" lay-event="edity">编辑</a>
+        @*<a class="layui-btn layui-btn-mini" lay-event="edity">查看订购商品</a>*@
         <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
     </div>
 </script>
 @section Scripts{
     <script type="text/javascript">
         var layer
+
         layui.use(['laypage', 'layer', 'table', 'element'], function () {
             layer = layui.layer
             table = layui.table
